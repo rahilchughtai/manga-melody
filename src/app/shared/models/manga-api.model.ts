@@ -1,0 +1,41 @@
+import {
+  MangaOrderByAttributeType,
+  MangaSortMethod,
+  MangaStatusType,
+} from './filter.model';
+import { MangaData } from './manga-item.model';
+
+export interface Items {
+  count: number;
+  total: number;
+  per_page: number;
+}
+
+export interface Pagination {
+  last_visible_page: number;
+  has_next_page: boolean;
+  current_page: number;
+  items: Items;
+}
+
+export interface JikanApiResponse {
+  pagination: Pagination;
+  data: MangaData[];
+}
+
+export interface JikanMangaByIdResponse {
+  data: MangaData;
+}
+
+export interface JikanApiRequestParam {
+  type?: string;
+  sfw?: boolean;
+  genres_exclude?: string;
+  page?: number;
+  limit?: number;
+  sort?: MangaSortMethod;
+  q?: string;
+  status?: MangaStatusType;
+  genres?: string;
+  order_by?: MangaOrderByAttributeType;
+}

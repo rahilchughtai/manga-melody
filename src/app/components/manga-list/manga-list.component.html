@@ -1,0 +1,15 @@
+@if (isLoading()) {
+<div class="spinner">
+  <mat-spinner></mat-spinner>
+</div>
+}@else {
+<div class="manga-list-wrapper">
+  @for (manga of mangaDataList(); track manga.mal_id) {
+  <div class="manga-item">
+    <app-manga-card [mangaData]="manga" />
+  </div>
+  } @empty {
+  <h1>No Manga found!</h1>
+  }
+</div>
+}

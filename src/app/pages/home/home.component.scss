@@ -1,0 +1,46 @@
+$hero-bg-image: url('../../../../public/home_wallpaper.jpg');
+$text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
+$dim-opacity: 0.6;
+
+.hero {
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  $dim-color-start: rgba(0, 0, 10, $dim-opacity);
+  $dim-color-end: rgba(0, 0, 20, $dim-opacity);
+
+  background: linear-gradient($dim-color-start, $dim-color-end), $hero-bg-image no-repeat center / cover;
+
+  button{
+  
+  }
+  .content {
+    text-align: center;
+    color: white;
+    text-shadow: $text-shadow;
+
+    p{
+      font-size: 1.5em;
+    }
+
+    h1 {
+      font-size: 3em;
+      span {
+        color: rgb(172, 164, 222);
+
+      }
+    }
+  }
+}
+
+
+.showcase{
+  text-align: center;
+}
+
+
+.benefits{
+  text-align: center;
+}

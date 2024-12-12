@@ -1,0 +1,38 @@
+$gradient-color-1: #c1c1ff 0%;
+$gradient-color-2: #e91e63 100%;
+
+$gradient-linear: linear-gradient(
+  to right,
+  $gradient-color-1,
+  $gradient-color-2
+);
+
+@mixin page-wrap {
+  display: flex;
+  margin: 10px auto 32px;
+  padding: 0 16px;
+  max-width: 960px;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin primary-gradient() {
+  background: -webkit-linear-gradient(
+    to right,
+    $gradient-color-1,
+    $gradient-color-2
+  );
+  background: -moz-linear-gradient(
+    to right,
+    $gradient-color-1,
+    $gradient-color-2
+  );
+  background: linear-gradient(to right, $gradient-color-1, $gradient-color-2);
+}
+
+@mixin gradient-font {
+  background: #0000ff;
+  @include primary-gradient();
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

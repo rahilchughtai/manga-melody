@@ -1,0 +1,28 @@
+<section class="hero">
+  <div class="content">
+    <h1>Welcome to
+      <span>
+        MangaMelody
+      </span>
+     </h1>
+     <p>
+      Your place to discover Manga
+    </p>
+    <button class="btn-large" mat-flat-button >Discover Manga</button>
+  </div>
+</section>
+
+
+<section class="showcase">
+  <div class="content">
+    <h2>Our Top Picks for you</h2>
+    <app-manga-list [isLoading]="isLoadingSig()"  [mangaDataList]="mangaDataSig() || []" />
+  </div>
+</section>
+
+
+<div class="benefits">
+  <h2>
+    Our Benefits
+  </h2>
+</div>
