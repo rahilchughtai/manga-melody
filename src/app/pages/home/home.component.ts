@@ -1,15 +1,14 @@
-import { Component, inject, input, signal, Signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MangaCardComponent } from '../../components/manga-card/manga-card.component';
 import { MangaApiService } from '../../shared/services';
-import { MangaData } from '../../shared/models';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map, tap } from 'rxjs';
 import { MangaListComponent } from '../../components/manga-list/manga-list.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [MatButtonModule, MangaCardComponent, MangaListComponent],
+  imports: [MatButtonModule, MangaListComponent, RouterLink],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
@@ -20,7 +19,7 @@ export class HomeComponent {
 
   public mangaDataSig = toSignal(
     this.mangaApiService.getJikanMangaData({ limit: this.limit }).pipe(
-      map((response) => response.data),
+      map((response) => response?.data),
       tap(() => this.isLoadingSig.set(false))
     )
   );

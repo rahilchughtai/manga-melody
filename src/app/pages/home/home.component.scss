@@ -13,20 +13,19 @@ $dim-opacity: 0.6;
 
   background: linear-gradient($dim-color-start, $dim-color-end), $hero-bg-image no-repeat center / cover;
 
-  button{
-  
-  }
+
   .content {
     text-align: center;
     color: white;
     text-shadow: $text-shadow;
 
-    p{
-      font-size: 1.5em;
+    p {
+      font-size: clamp(1rem, 3vw, 1.5rem);
     }
 
     h1 {
-      font-size: 3em;
+      font-size: clamp(2rem, 5vw, 3rem);
+
       span {
         color: rgb(172, 164, 222);
 
@@ -36,11 +35,11 @@ $dim-opacity: 0.6;
 }
 
 
-.showcase{
+.showcase {
   text-align: center;
 }
 
 
-.benefits{
+.benefits {
   text-align: center;
 }
