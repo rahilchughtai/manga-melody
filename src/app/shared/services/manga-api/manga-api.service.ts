@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { JikanApiRequestParam, JikanApiResponse } from '../../models';
-import { catchError, of } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -28,12 +28,12 @@ export class MangaApiService {
     };
   }
 
-  public getJikanMangaData(requestParameters: JikanApiRequestParam) {
+  public getJikanMangaData(
+    requestParameters: JikanApiRequestParam
+  ): Observable<JikanApiResponse | undefined> {
     const params = this.overwriteParams(requestParameters);
     return this.http
       .get<JikanApiResponse>(`${this.BASE_URL}/manga`, { params })
-      .pipe(catchError(() => of(undefined)
-    )
-    );
+      .pipe(catchError(() => of(undefined)));
   }
 }

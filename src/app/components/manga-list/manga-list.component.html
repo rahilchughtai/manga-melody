@@ -4,7 +4,7 @@
 </div>
 }@else {
 <div class="manga-list-wrapper">
-  @for (manga of mangaDataList(); track manga.mal_id) {
+  @for (manga of mangaList(); track manga.mal_id) {
   <div class="manga-item">
     <app-manga-card [mangaData]="manga" />
   </div>

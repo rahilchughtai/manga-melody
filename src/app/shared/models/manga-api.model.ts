@@ -3,8 +3,7 @@ import {
   MangaSortMethod,
   MangaStatusType,
 } from './filter.model';
-import { MangaData } from './manga-item.model';
-
+import { MangaItem } from './manga-item.model';
 export interface Items {
   count: number;
   total: number;
@@ -20,11 +19,11 @@ export interface Pagination {
 
 export interface JikanApiResponse {
   pagination: Pagination;
-  data: MangaData[];
+  data: MangaItem[];
 }
 
 export interface JikanMangaByIdResponse {
-  data: MangaData;
+  data: MangaItem;
 }
 
 export interface JikanApiRequestParam {

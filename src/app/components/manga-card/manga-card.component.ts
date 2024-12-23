@@ -1,16 +1,51 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
-import { MangaData } from '../../shared/models';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-MatIconModule;
+import { FavoritesService } from '../../shared/services/favorites/favorites.service';
+import { MangaItem } from '../../shared/models';
+import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-manga-card',
-  imports: [MatCardModule, MatButtonModule, MatTooltipModule, MatIconModule],
+  imports: [
+    CommonModule,
+    MatCardModule,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
+  ],
   templateUrl: './manga-card.component.html',
   styleUrl: './manga-card.component.scss',
 })
 export class MangaCardComponent {
-  mangaData = input.required<MangaData>();
+  private router = inject(Router);
+  private favoritesService = inject(FavoritesService);
+
+  public fullWidthTitle = input<boolean>(false);
+
+  public mangaData = input.required<MangaItem>();
+
+  public isFavoriteSig = computed(() =>
+    this.favoritesService.isFavorite(this.mangaData())()
+  );
+
+  public placeHolderImageSig = computed(
+    () => `https://placehold.co/225x320?text=${this.mangaData().title_english}`
+  );
+
+  public btnMangaFavoriteClick(e: Event) {
+    e.stopPropagation();
+    if (!this.isFavoriteSig()) {
+      return this.favoritesService.addMangaFavorite(this.mangaData());
+    }
+    return this.favoritesService.removeMangaFromFavorites(this.mangaData());
+  }
+
+  public onMangaClicked() {
+    this.router.navigate([`/manga/${this.mangaData().mal_id}`], {
+      state: { mangaData: this.mangaData() },
+    });
+  }
 }
