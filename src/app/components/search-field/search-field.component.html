@@ -1,0 +1,16 @@
+<form [formGroup]="mangaSearchForm">
+    <mat-form-field appearance="outline" >
+        <mat-label>Manga title</mat-label>
+        <input formControlName="searchTerm" matInput>
+    </mat-form-field>
+</form>
+
+<pre>
+    {{mangaSearchForm.value | json }}
+</pre>
+
+
+
+<!-- <pre>
+    {{QueryFormGroup.value | json }}
+  </pre> -->
