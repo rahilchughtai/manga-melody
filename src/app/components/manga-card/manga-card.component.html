@@ -1,31 +1,35 @@
 <mat-card
-[matTooltip]="mangaData().title_english"
-matTooltipPosition="above"
-appearance="raised">
+  (click)="onMangaClicked()"
+  [matTooltip]="mangaData().title_english"
+  matTooltipPosition="above"
+  appearance="raised"
+>
   <mat-card-header>
-    <mat-card-title>
-
+    <mat-card-title [class.full-width]="fullWidthTitle()" >
       {{ mangaData().title }}
     </mat-card-title>
   </mat-card-header>
-  <img
-    loading="lazy"
-    mat-card-image
-    [src]="
-      mangaData().images.jpg.image_url ||
-      'https://placehold.co/400x500?text=No+Image'
-    "
-    alt="Manga Image"
-  />
-  <mat-card-actions>
+  <div class="mat-card-image">
+    <img
+      loading="lazy"
+      mat-card-image
+      [src]="mangaData().images.jpg.image_url || placeHolderImageSig()"
+      alt="Manga Image"
+    />
+  </div>
 
-    <button mat-mini-fab>
+  <mat-card-actions>
+    <button
+      class="btn-favorite"
+      [class.not-favorite]="!isFavoriteSig()"
+      (click)="btnMangaFavoriteClick($event)"
+      mat-mini-fab
+    >
       <mat-icon>favorite</mat-icon>
     </button>
 
-    <button  mat-mini-fab>
+    <button mat-mini-fab>
       <mat-icon>shopping_cart</mat-icon>
     </button>
-
   </mat-card-actions>
 </mat-card>

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { MangaData } from '../../shared/models';
+import { MangaFavorite, MangaItem } from '../../shared/models';
 import { MangaCardComponent } from "../manga-card/manga-card.component";
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
@@ -10,7 +10,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class MangaListComponent {
 
-  public mangaDataList = input.required<MangaData[]>();
-  public isLoading = input<boolean>(true);
+  public mangaList = input.required<MangaItem[]>();
+  public isLoading = input<boolean>(false);
 
 }

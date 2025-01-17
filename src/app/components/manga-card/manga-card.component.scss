@@ -1,27 +1,65 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+
+$bg-color: map.get(
+  $map: mat.$azure-palette,
+  $key: 10,
+);
+
+$dark-blue: map.get(
+  $map: mat.$azure-palette,
+  $key: 0,
+);
+
+$cherry: map.get(
+  $map: mat.$red-palette,
+  $key: 30,
+);
+
 mat-card {
+  background-color: $bg-color;
   cursor: pointer;
-  mat-card-title{
+
+  mat-card-title {
     font-size: 1.3rem;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 200px;
-    overflow:hidden;
-    padding-bottom: .5em;
+    overflow: hidden;
+    padding-bottom: 0.5em;
     font-weight: bold;
+    &:not(.full-width) {
+      max-width: 200px;
+    }
   }
 
+  .mat-card-image,
   mat-card-header,
   mat-card-actions {
     padding-top: 1em;
     display: flex;
     justify-content: space-around;
-
   }
 
   img {
     width: 225px;
     height: 320px;
     object-fit: cover;
+  }
+}
 
+.btn-favorite {
+  @include mat.fab-overrides(
+    (
+      small-container-color: $cherry,
+    )
+  );
+
+  &.not-favorite {
+    @include mat.fab-overrides(
+      (
+        small-container-color: $dark-blue,
+        small-hover-container-elevation-shadow: 0px 4px 8px $cherry,
+      )
+    );
   }
 }

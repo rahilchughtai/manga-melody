@@ -1,0 +1,12 @@
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2em;
+  .manga {
+    width: 70%;
+  }
+}
+.content {
+  border: 1px red solid;
+}

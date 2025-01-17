@@ -1,15 +1,19 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
 
 html {
   color-scheme: dark;
-  @include mat.theme((color: (primary: mat.$azure-palette,
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
+        theme-type: dark,
       ),
       typography: Roboto,
       density: 0,
-    ));
+    )
+  );
 }
-
 
 html,
 body {
@@ -24,7 +28,10 @@ body {
 
 
 .mat-cherry {
-  @include mat.button-overrides((filled-container-color: orange,
+  @include mat.button-overrides(
+    (
+      filled-container-color: orange,
       filled-label-text-color: red,
-    ));
+    )
+  );
 }
