@@ -9,7 +9,7 @@
     <app-manga-card [mangaData]="manga" />
   </div>
   } @empty {
-  <h1>No Manga found!</h1>
+  <h1>{{emptyListMessage()}}</h1>
   }
 </div>
 }

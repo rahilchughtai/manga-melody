@@ -1,10 +1,49 @@
 <form [formGroup]="mangaSearchForm">
-    <mat-form-field appearance="outline" >
-        <mat-label>Manga title</mat-label>
-        <input formControlName="searchTerm" matInput>
-    </mat-form-field>
-</form>
+  <mat-form-field appearance="outline">
+    <mat-label>Manga title</mat-label>
+    <input formControlName="searchTerm" matInput />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Status</mat-label>
+    <mat-select formControlName="status">
+      <mat-option *ngFor="let status of allMangaStatus" [value]="status">
+        {{ status | titlecase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<pre>
-    {{mangaSearchForm.value | json }}
-</pre>
+  <mat-form-field appearance="fill">
+    <mat-label>Genres</mat-label>
+    <mat-select formControlName="genre" multiple>
+      <!-- <mat-select-trigger>
+            <form-genre-display [mangaGenre]="mangaGenre">
+            </form-genre-display>
+          </mat-select-trigger> -->
+      <mat-option *ngFor="let genre of allMangaGenres" [value]="genre">{{
+        genre.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Order By</mat-label>
+    <mat-select formControlName="orderBy">
+      <mat-option
+        *ngFor="let orderAttribute of orderByAttributes"
+        [value]="orderAttribute"
+      >
+        {{ orderAttribute | titlecase }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button (click)="toggleSortMethod()" mat-fab>
+    <mat-icon
+      >{{
+        mangaSearchForm.get("sortBy")?.value === "asc"
+          ? "arrow_upwards"
+          : "arrow_downwards"
+      }}
+    </mat-icon>
+  </button>
+</form>

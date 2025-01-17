@@ -35,8 +35,8 @@ export class MangaCardComponent {
     () => `https://placehold.co/225x320?text=${this.mangaData().title_english}`
   );
 
-  public btnMangaFavoriteClick(e: Event) {
-    e.stopPropagation();
+  public btnMangaFavoriteClick(event: Event) {
+    event.stopPropagation();
     if (!this.isFavoriteSig()) {
       return this.favoritesService.addMangaFavorite(this.mangaData());
     }

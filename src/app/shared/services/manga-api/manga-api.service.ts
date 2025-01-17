@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { JikanApiRequestParam, JikanApiResponse } from '../../models';
+import {
+  GenreItem,
+  JikanApiRequestParam,
+  JikanApiResponse,
+  ExtendedSearchFormData
+} from '../../models';
 import { catchError, Observable, of } from 'rxjs';
 
 @Injectable({
@@ -25,6 +30,32 @@ export class MangaApiService {
     return {
       ...this.standardParams,
       ...params,
+    };
+  }
+
+  private mangaGenreToParam(genres: GenreItem[]): string {
+    if (!genres.length) return '';
+    let genreParams = '';
+    genres.forEach((genre, idx) => {
+      genreParams += genre.mal_id;
+      if (idx !== genres.length - 1) genreParams += ',';
+    });
+
+    return genreParams;
+  }
+
+  public formDataToSearchQuery(
+    formData: Partial<ExtendedSearchFormData>
+  ): JikanApiRequestParam {
+    const { searchTerm, status, orderBy, genre, sortBy, page, limit } = formData;
+    return {
+      ...(searchTerm && { q: searchTerm }),
+      ...(status && { status }),
+      ...(genre && { genres: this.mangaGenreToParam(genre) }),
+      ...(orderBy && { order_by: orderBy }),
+      ...(sortBy && { sort: sortBy }),
+      ...(page && { page }),
+      ...(limit && { limit }),
     };
   }
 
