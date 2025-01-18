@@ -1,18 +1,21 @@
-<div class="mangaList">
+<div class="search">
   <h1>Discover your favorite Mangas</h1>
-
   <div class="content">
-    <app-search-field></app-search-field>
-    <!--
-    <div [hidden]="!(JikanApiResponse$|async)?.data?.length">
-      <mat-paginator showFirstLastButtons="true" [length]="totalRecords" [pageSize]="pageSize"
-        [pageSizeOptions]="[12,24]" (page)="pageEvent($event)" aria-label="Select page">
+    <app-search-field (search)="handleSearchChange($event)" />
+    <app-manga-list
+      [isLoading]="mangaDataResponse.isLoading()"
+      [mangaList]="mangaListSig()"
+    />
+    <div class="paginator" [hidden]="mangaDataResponse.isLoading()">
+      <mat-paginator
+        showFirstLastButtons="true"
+        [length]="totalItemsSig()"
+        [pageSize]="pageSizeSig()"
+        [pageSizeOptions]="[12, 24]"
+        (page)="pageEvent($event)"
+        aria-label="Select page"
+      >
       </mat-paginator>
-    </div> -->
-
-    <!--
-    <ng-template #loadSpinner>
-      <mat-spinner></mat-spinner>
-    </ng-template> -->
+    </div>
   </div>
 </div>

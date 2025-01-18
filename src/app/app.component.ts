@@ -1,4 +1,10 @@
-import { Component, computed, effect, HostListener, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  HostListener,
+  signal,
+} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,10 +24,10 @@ import { CommonModule } from '@angular/common';
     MatListModule,
     MatToolbarModule,
     MatIconModule,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'manga-melody';
@@ -33,7 +39,9 @@ export class AppComponent {
   onResize(_event: Event): void {
     this.screenWidth.set(window.innerWidth);
   }
-  readonly isScreenWide = computed(() => this.screenWidth() >= this.mobileWidthBreakpoint);
+  readonly isScreenWide = computed(
+    () => this.screenWidth() >= this.mobileWidthBreakpoint
+  );
 
   constructor() {
     window.addEventListener('resize', this.updateScreenWidth);
@@ -45,11 +53,10 @@ export class AppComponent {
     { path: '/favorites', text: 'Favorites' },
     { path: '/cart', text: 'Cart' },
     { path: '/orders', text: 'Orders' },
-    { path: '/profile', text: 'Profile' }
+    { path: '/profile', text: 'Profile' },
   ];
 
   private updateScreenWidth = () => {
     this.screenWidth.set(window.innerWidth);
   };
-
 }

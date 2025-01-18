@@ -1,4 +1,4 @@
-import { GenreItem } from './filter.model';
+import { GenreItem } from './search.model';
 
 export interface MangaImage {
   jpg: MangaImageCollection;
@@ -93,9 +93,3 @@ export type MangaType =
   | 'Doujin'
   | 'Manhwa'
   | 'Manhua';
-export type MangaStatus =
-  | 'Publishing'
-  | 'Complete'
-  | 'On Hiatus'
-  | 'Discontinued'
-  | 'Upcoming';
