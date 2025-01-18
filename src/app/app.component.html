@@ -1,28 +1,34 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #sidenav mode="over" class="sidenav">
-        <mat-nav-list>
-            @for (link of navLinks; track link.path) {
-            <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">{{link.text}}</a>
-            }
-        </mat-nav-list>
-    </mat-sidenav>
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <mat-nav-list>
+      @for (link of navLinks; track link.path) {
+      <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">{{
+        link.text
+      }}</a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
 
-    <mat-sidenav-content>
-        <mat-toolbar color="primary" class="toolbar">
-            <button *ngIf="!isScreenWide()" mat-icon-button (click)="sidenav.toggle()">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <span>MangaMelody </span>
-            @if (isScreenWide())
-            {
-            <div class="spacer"></div>
-            @for (link of navLinks; track link.path) { <a [routerLink]="link.path">{{link.text}} </a>}
-            }
-        </mat-toolbar>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button
+        *ngIf="!isScreenWide()"
+        mat-icon-button
+        (click)="sidenav.toggle()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>
+        <a routerLink="/"> MangaMelody </a>
+      </span>
+      @if (isScreenWide()) {
+      <div class="spacer"></div>
+      @for (link of navLinks; track link.path) {
+      <a [routerLink]="link.path">{{ link.text }} </a>} }
+    </mat-toolbar>
 
-        <div class="content">
-            <router-outlet></router-outlet>
-        </div>
-
-    </mat-sidenav-content>
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>
