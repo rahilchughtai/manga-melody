@@ -13,6 +13,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 
+interface NavigationLink {
+  path: string;
+  text: string;
+  icon: string;
+}
+
 @Component({
   selector: 'app-root',
   imports: [
@@ -47,13 +53,13 @@ export class AppComponent {
     window.addEventListener('resize', this.updateScreenWidth);
   }
 
-  public readonly navLinks = [
-    { path: '', text: 'Home' },
-    { path: '/search', text: 'Search' },
-    { path: '/favorites', text: 'Favorites' },
-    { path: '/cart', text: 'Cart' },
-    { path: '/orders', text: 'Orders' },
-    { path: '/profile', text: 'Profile' },
+  navLinks: NavigationLink[] = [
+    { path: '', text: 'Home', icon: 'home' },
+    { path: '/search', text: 'Search', icon: 'search' },
+    { path: '/favorites', text: 'Favorites', icon: 'favorite' },
+    { path: '/cart', text: 'Cart', icon: 'shopping_cart' },
+    { path: '/orders', text: 'Orders', icon: 'receipt' },
+    { path: '/profile', text: 'Profile', icon: 'person' },
   ];
 
   private updateScreenWidth = () => {
