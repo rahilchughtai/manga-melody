@@ -1,12 +1,15 @@
+.page-wrapper {
+  padding: 0 2em;
+}
 .wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1.2em;
-  .manga {
-    width: 70%;
+  .content {
+    max-width: 400px;
   }
 }
 .content {
-  border: 1px red solid;
+  // border: 1px red solid;
 }

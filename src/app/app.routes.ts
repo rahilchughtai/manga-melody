@@ -3,6 +3,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { SearchComponent } from './pages/search/search.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
 import { MangaDetailsComponent } from './pages/manga-details/manga-details.component';
+import { LoginRegisterComponent } from './pages/login-register/login-register.component';
 
 export const routes: Routes = [
   {
@@ -20,5 +21,9 @@ export const routes: Routes = [
   {
     path: 'manga/:id',
     component: MangaDetailsComponent,
-  }
+  },
+  {
+    path: 'login',
+    component: LoginRegisterComponent,
+  },
 ];

@@ -1,10 +1,4 @@
-import {
-  Component,
-  computed,
-  effect,
-  HostListener,
-  signal,
-} from '@angular/core';
+import { Component, computed, HostListener, signal } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -60,6 +54,7 @@ export class AppComponent {
     { path: '/cart', text: 'Cart', icon: 'shopping_cart' },
     { path: '/orders', text: 'Orders', icon: 'receipt' },
     { path: '/profile', text: 'Profile', icon: 'person' },
+    { path: '/login', text: 'Login', icon: 'login' },
   ];
 
   private updateScreenWidth = () => {
