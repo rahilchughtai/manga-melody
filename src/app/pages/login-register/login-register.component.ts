@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AuthService } from '../../shared/services/auth/auth.service';
 
 @Component({
   selector: 'app-login-register',
@@ -8,4 +9,7 @@ import { MatTabsModule } from '@angular/material/tabs';
   templateUrl: './login-register.component.html',
   styleUrl: './login-register.component.scss',
 })
-export class LoginRegisterComponent {}
+export class LoginRegisterComponent {
+  public authService = inject(AuthService);
+  public isLoggedInSig = this.authService.isLoggedIn();
+}

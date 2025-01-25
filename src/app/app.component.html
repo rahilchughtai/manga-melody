@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav #sidenav mode="over" class="sidenav-mobile">
     <mat-nav-list>
-      @for (link of navLinks; track link.path) {
+      @for (link of navigationLinks(); track link.path) {
       <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
         <span class="link-item">
           <mat-icon> {{ link.icon }} </mat-icon>
@@ -29,7 +29,7 @@
       </span>
       @if (isScreenWide()) {
       <div class="spacer"></div>
-      @for (link of navLinks; track link.path) {
+      @for (link of navigationLinks(); track link.path) {
       <a [routerLink]="link.path">
         <mat-icon> {{ link.icon }} </mat-icon> </a
       >} }

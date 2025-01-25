@@ -5,6 +5,8 @@
   </mat-tab-group>
   <div class="google">
     <p>Or</p>
-    <button mat-flat-button>Login with Google</button>
+    <button (click)="authService.signInWithGoogle()" mat-flat-button>
+      Login with Google
+    </button>
   </div>
 </div>
