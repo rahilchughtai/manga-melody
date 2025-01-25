@@ -3,6 +3,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MangaCardComponent } from '../../components/manga-card/manga-card.component';
 import { MangaItem } from '../../shared/models';
+import { MatButtonModule } from '@angular/material/button';
 
 interface MangaNavigationData {
   mangaData: MangaItem;
@@ -10,11 +11,12 @@ interface MangaNavigationData {
 
 @Component({
   selector: 'app-manga-details',
-  imports: [CommonModule, MangaCardComponent],
+  imports: [CommonModule, MangaCardComponent, MatButtonModule],
   templateUrl: './manga-details.component.html',
   styleUrl: './manga-details.component.scss',
 })
 export class MangaDetailsComponent {
   private router = inject(Router);
-  public navigationState = this.router.getCurrentNavigation()?.extras.state as MangaNavigationData;
+  public navigationState = this.router.getCurrentNavigation()?.extras
+    .state as MangaNavigationData;
 }

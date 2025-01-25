@@ -1,10 +1,23 @@
-import { computed, effect, Injectable, Signal, signal } from '@angular/core';
+import {
+  computed,
+  effect,
+  inject,
+  Injectable,
+  Signal,
+  signal,
+  untracked,
+} from '@angular/core';
 import { MangaFavorite, MangaItem } from '../../models';
+import { AuthService } from '../auth/auth.service';
+import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
+  private authService = inject(AuthService);
+  private isLoggedInSig = this.authService.isLoggedIn();
+  private firestore = inject(Firestore);
   private STORAGE_ID = 'favorites';
   private sigMangaFavorites = signal(this.getInitialStorageFavorites());
   public sigMangaFavoriteIds = computed(
@@ -14,7 +27,21 @@ export class FavoritesService {
 
   constructor() {
     effect(() => {
-      localStorage.setItem('favorites', JSON.stringify(this.mangaFavorites()));
+      localStorage.setItem(
+        this.STORAGE_ID,
+        JSON.stringify(this.mangaFavorites())
+      );
+      if (untracked(this.isLoggedInSig)) {
+        setDoc(
+          doc(
+            this.firestore,
+            'users',
+            untracked(this.authService.userData)?.uid ?? ''
+          ),
+          { favorites: this.mangaFavorites() },
+          { merge: true }
+        );
+      }
     });
   }
 

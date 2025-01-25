@@ -16,7 +16,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
   private mangaApiService = inject(MangaApiService);
   private limit = 5;
-  
+
   public isLoadingSig = signal(true);
   public mangaData = rxResource({
     loader: () =>
@@ -24,5 +24,4 @@ export class HomeComponent {
         .getJikanMangaData({ limit: this.limit })
         .pipe(map((response) => response?.data)),
   }).asReadonly();
-
 }

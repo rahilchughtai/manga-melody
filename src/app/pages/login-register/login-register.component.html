@@ -1,0 +1,12 @@
+<div class="page">
+  <mat-tab-group>
+    <mat-tab label="Login"> Login </mat-tab>
+    <mat-tab label="Register"> Register</mat-tab>
+  </mat-tab-group>
+  <div class="google">
+    <p>Or</p>
+    <button (click)="authService.signInWithGoogle()" mat-flat-button>
+      Login with Google
+    </button>
+  </div>
+</div>

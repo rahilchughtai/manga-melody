@@ -1,8 +1,8 @@
 import {
   Component,
   computed,
-  effect,
   HostListener,
+  inject,
   signal,
 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -12,13 +12,9 @@ import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-
-interface NavigationLink {
-  path: string;
-  text: string;
-  icon: string;
-}
-
+import { collection, collectionData, Firestore } from '@angular/fire/firestore';
+import { AuthService } from './shared/services/auth/auth.service';
+import { NavigationLink } from './shared/models';
 @Component({
   selector: 'app-root',
   imports: [
@@ -36,6 +32,7 @@ interface NavigationLink {
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  isLoggedInSig = inject(AuthService).isLoggedIn();
   title = 'manga-melody';
 
   private readonly screenWidth = signal(window.innerWidth);
@@ -53,14 +50,33 @@ export class AppComponent {
     window.addEventListener('resize', this.updateScreenWidth);
   }
 
-  navLinks: NavigationLink[] = [
+  private navLinks: NavigationLink[] = [
     { path: '', text: 'Home', icon: 'home' },
-    { path: '/search', text: 'Search', icon: 'search' },
-    { path: '/favorites', text: 'Favorites', icon: 'favorite' },
-    { path: '/cart', text: 'Cart', icon: 'shopping_cart' },
-    { path: '/orders', text: 'Orders', icon: 'receipt' },
-    { path: '/profile', text: 'Profile', icon: 'person' },
+    { path: 'search', text: 'Search', icon: 'search' },
+    { path: 'favorites', text: 'Favorites', icon: 'favorite' },
+    { path: 'cart', text: 'Cart', icon: 'shopping_cart' },
+    { path: 'orders', text: 'Orders', icon: 'receipt' },
+    { path: 'profile', text: 'Profile', icon: 'person' },
+    { path: 'login', text: 'Login', icon: 'login' },
   ];
+
+  public navigationLinks = computed(() =>
+    this.navLinks.filter((link) => {
+      const isInvalidOrdersLink =
+        link.path === 'orders' && !this.isLoggedInSig();
+      const isInvalidCartLink = link.path === 'cart' && !this.isLoggedInSig();
+      const isInvalidLoginLink = link.path === 'login' && this.isLoggedInSig();
+      const isInvalidProfileLink =
+        link.path === 'profile' && !this.isLoggedInSig();
+      return (
+        !isInvalidCartLink &&
+        !isInvalidOrdersLink &&
+        !isInvalidOrdersLink &&
+        !isInvalidLoginLink &&
+        !isInvalidProfileLink
+      );
+    })
+  );
 
   private updateScreenWidth = () => {
     this.screenWidth.set(window.innerWidth);
