@@ -1,29 +1,56 @@
 <div class="page-wrapper">
   <h1>Manga Details</h1>
-  <div class="wrapper">
+  <div class="manga-info">
     <div class="manga">
       <app-manga-card
         [fullWidthTitle]="true"
-        [mangaData]="navigationState.mangaData"
+        [mangaData]="navState.mangaData"
       />
     </div>
     <div class="content">
       <div class="score">
         <h2>Ratings</h2>
-        <p>Score: {{ navigationState.mangaData.score }} / 10</p>
-        <p>Popularity {{ navigationState.mangaData.popularity }}</p>
-        <p>Members {{ navigationState.mangaData.members }}</p>
+        <p>Score: {{ navState.mangaData.score }} / 10</p>
+        <p>Popularity {{ navState.mangaData.popularity }}</p>
+        <p>Members {{ navState.mangaData.members }}</p>
       </div>
+      <h2>Synopsis</h2>
       <div class="synopsis">
-        <h2>Synopsis</h2>
         <p>
-          {{ navigationState.mangaData.synopsis }}
+          {{ navState.mangaData.synopsis }}
         </p>
       </div>
+      <h2>Price: 20 Euro</h2>
     </div>
   </div>
-  <section class="price">
-    <h1>Price: 20 Euro</h1>
+  <section class="payment">
+    <form [formGroup]="mangaDetailsForm" class="payment-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Manga Volume</mat-label>
+        <mat-select formControlName="volume">
+          <mat-option *ngFor="let volume of volumesArray" [value]="volume">
+            Volume No: {{ volume }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <mat-select formControlName="quantity">
+          <mat-option *ngFor="let quantity of quantityArray" [value]="quantity">
+            {{ quantity }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button
+        [disabled]="
+          !mangaDetailsForm.value.quantity || !mangaDetailsForm.value.volume
+        "
+        (click)="addMangaItemToCart()"
+        mat-fab
+        extended
+      >
+        Add to Cart
+      </button>
+    </form>
   </section>
-  <button mat-flat-button>Add to cart</button>
 </div>

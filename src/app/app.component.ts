@@ -32,7 +32,7 @@ import { NavigationLink } from './shared/models';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  isLoggedInSig = inject(AuthService).isLoggedIn();
+  isLoggedInSig = inject(AuthService).isLoggedInSig();
   title = 'manga-melody';
 
   private readonly screenWidth = signal(window.innerWidth);

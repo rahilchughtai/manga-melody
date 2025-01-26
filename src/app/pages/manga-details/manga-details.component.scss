@@ -1,15 +1,63 @@
+@use "@angular/material" as mat;
+@use "sass:map";
+
+$info-width: 400px;
+$info-height: 300px;
+
+$bg-color: map.get(
+  $map: mat.$azure-palette,
+  $key: 10,
+);
+
+$light-blue: map.get(
+  $map: mat.$azure-palette,
+  $key: 50,
+);
+
+$cherry: map.get(
+  $map: mat.$red-palette,
+  $key: 30,
+);
+
 .page-wrapper {
   padding: 0 2em;
-}
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.2em;
-  .content {
-    max-width: 400px;
+  .manga-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2em;
+    .content {
+      max-width: $info-width;
+    }
+
+    .synopsis {
+      max-height: 300px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $bg-color;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $light-blue;
+        border-radius: 10px;
+      }
+    }
   }
-}
-.content {
-  // border: 1px red solid;
+
+  .payment {
+    text-align: center;
+    .payment-form {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+    }
+
+    h2 {
+      text-align: right;
+    }
+  }
 }

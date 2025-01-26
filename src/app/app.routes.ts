@@ -11,6 +11,7 @@ import {
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
 import { APP_ROUTES } from './shared/utils/app-routes';
+import { CartComponent } from './pages/cart/cart.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToProfile = () => redirectLoggedInTo(['profile']);
@@ -40,6 +41,11 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.PROFILE,
     component: ProfileComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: APP_ROUTES.CART,
+    component: CartComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
 ];

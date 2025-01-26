@@ -36,7 +36,7 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './search-field.component.scss',
 })
 export class SearchFieldComponent {
-  private defaultSortMethod: MangaSortMethod = 'asc';
+  private defaultSortMethod: MangaSortMethod = 'desc';
   private debounceTimer = 500;
   public mangaSearchForm = new FormGroup({
     searchTerm: new FormControl(''),

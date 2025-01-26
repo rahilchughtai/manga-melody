@@ -69,6 +69,17 @@ export interface MangaItem extends MangaFavorite {
   genres?: GenreItem[];
 }
 
+export type MinimalMangaItemData = Pick<
+  MangaItem,
+  | 'mal_id'
+  | 'title'
+  | 'title_english'
+  | 'title_japanese'
+  | 'published'
+  | 'volumes'
+  | 'images'
+>;
+
 export interface Published {
   from: Date;
   to?: Date;

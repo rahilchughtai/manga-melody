@@ -1,11 +1,11 @@
 <div class="profile">
   <h1>Profile</h1>
   <img
-    [src]="userDataSig()?.photoURL || 'assets/user.jpg'"
-    src="assets/user.jpg"
+    [src]="imageError ? fallbackImage : imageUIrl()"
+    (error)="imageError = true"
     alt="User Photo"
   />
-  <p>Username: {{ userDataSig()?.displayName }}</p>
-  <p>E-Mail: {{ userDataSig()?.email }}</p>
+  <p>Username: {{ userData()?.displayName }}</p>
+  <p>E-Mail: {{ userData()?.email }}</p>
   <button mat-flat-button (click)="authService.signOut()">Sign Out</button>
 </div>

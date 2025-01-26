@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 
@@ -11,5 +11,10 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ProfileComponent {
   public authService = inject(AuthService);
-  public userDataSig = this.authService.userData;
+  public userData = this.authService.userStateSig;
+  public imageError = false;
+  public fallbackImage = 'assets/user.jpg';
+  public imageUIrl = computed(
+    () => this.userData()?.photoURL ?? this.fallbackImage
+  );
 }
