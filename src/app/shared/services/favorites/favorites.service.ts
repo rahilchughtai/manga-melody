@@ -16,7 +16,7 @@ import { doc, Firestore, setDoc } from '@angular/fire/firestore';
 })
 export class FavoritesService {
   private authService = inject(AuthService);
-  private isLoggedInSig = this.authService.isLoggedIn();
+  private isLoggedInSig = this.authService.isLoggedInSig();
   private firestore = inject(Firestore);
   private STORAGE_ID = 'favorites';
   private sigMangaFavorites = signal(this.getInitialStorageFavorites());
@@ -33,11 +33,7 @@ export class FavoritesService {
       );
       if (untracked(this.isLoggedInSig)) {
         setDoc(
-          doc(
-            this.firestore,
-            'users',
-            untracked(this.authService.userData)?.uid ?? ''
-          ),
+          this.authService.userDocumentRef,
           { favorites: this.mangaFavorites() },
           { merge: true }
         );

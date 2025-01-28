@@ -11,5 +11,5 @@ import { AuthService } from '../../shared/services/auth/auth.service';
 })
 export class LoginRegisterComponent {
   public authService = inject(AuthService);
-  public isLoggedInSig = this.authService.isLoggedIn();
+  public isLoggedInSig = this.authService.isLoggedInSig();
 }
