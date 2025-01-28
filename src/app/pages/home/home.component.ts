@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MangaApiService } from '../../shared/services';
-import { rxResource, toSignal } from '@angular/core/rxjs-interop';
-import { map, tap } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 import { MangaListComponent } from '../../components/manga-list/manga-list.component';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -22,6 +22,6 @@ export class HomeComponent {
     loader: () =>
       this.mangaApiService
         .getJikanMangaData({ limit: this.limit })
-        .pipe(map((response) => response?.data)),
+        .pipe(map(response => response?.data)),
   }).asReadonly();
 }

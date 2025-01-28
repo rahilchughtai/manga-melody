@@ -12,7 +12,6 @@ import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { collection, collectionData, Firestore } from '@angular/fire/firestore';
 import { AuthService } from './shared/services/auth/auth.service';
 import { NavigationLink } from './shared/models';
 @Component({
@@ -39,7 +38,7 @@ export class AppComponent {
   private mobileWidthBreakpoint = 768;
 
   @HostListener('window:resize', ['$event'])
-  onResize(_event: Event): void {
+  onResize(): void {
     this.screenWidth.set(window.innerWidth);
   }
   readonly isScreenWide = computed(
@@ -61,7 +60,7 @@ export class AppComponent {
   ];
 
   public navigationLinks = computed(() =>
-    this.navLinks.filter((link) => {
+    this.navLinks.filter(link => {
       const isInvalidOrdersLink =
         link.path === 'orders' && !this.isLoggedInSig();
       const isInvalidCartLink = link.path === 'cart' && !this.isLoggedInSig();

@@ -1,5 +1,4 @@
-import { JsonPipe } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { MatButtonModule } from '@angular/material/button';
 

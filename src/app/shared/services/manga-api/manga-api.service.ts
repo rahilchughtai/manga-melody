@@ -4,7 +4,7 @@ import {
   GenreItem,
   JikanApiRequestParam,
   JikanApiResponse,
-  ExtendedSearchFormData
+  ExtendedSearchFormData,
 } from '../../models';
 import { catchError, Observable, of } from 'rxjs';
 
@@ -47,7 +47,8 @@ export class MangaApiService {
   public formDataToSearchQuery(
     formData: Partial<ExtendedSearchFormData>
   ): JikanApiRequestParam {
-    const { searchTerm, status, orderBy, genre, sortBy, page, limit } = formData;
+    const { searchTerm, status, orderBy, genre, sortBy, page, limit } =
+      formData;
     return {
       ...(searchTerm && { q: searchTerm }),
       ...(status && { status }),

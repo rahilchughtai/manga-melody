@@ -30,8 +30,7 @@
     <mat-select formControlName="orderBy">
       <mat-option
         *ngFor="let orderAttribute of orderByAttributes"
-        [value]="orderAttribute"
-      >
+        [value]="orderAttribute">
         {{ orderAttribute | titlecase }}
       </mat-option>
     </mat-select>
@@ -40,9 +39,9 @@
   <button (click)="toggleSortMethod()" mat-fab>
     <mat-icon
       >{{
-        mangaSearchForm.get("sortBy")?.value === "asc"
-          ? "arrow_upwards"
-          : "arrow_downwards"
+        mangaSearchForm.get('sortBy')?.value === 'asc'
+          ? 'arrow_upwards'
+          : 'arrow_downwards'
       }}
     </mat-icon>
   </button>

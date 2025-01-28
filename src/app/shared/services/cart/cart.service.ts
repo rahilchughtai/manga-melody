@@ -1,16 +1,8 @@
 import { inject, Injectable } from '@angular/core';
-import {
-  arrayUnion,
-  doc,
-  Firestore,
-  getDoc,
-  setDoc,
-  updateDoc,
-} from '@angular/fire/firestore';
+import { updateDoc } from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth.service';
 import { CartItem } from '../../models/cart.model';
-import { map, pipe, take } from 'rxjs';
-import { MangaUser } from '../../models/manga-user.model';
+import { map, take } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,12 +11,12 @@ export class CartService {
   private authService = inject(AuthService);
 
   public getShoppingCart() {
-    return this.authService.getUserData().pipe(map((user) => user?.cart ?? []));
+    return this.authService.getUserData().pipe(map(user => user?.cart ?? []));
   }
 
   private findCartItemIndex(cart: CartItem[], newCartItem: CartItem) {
     return cart.findIndex(
-      (item) =>
+      item =>
         item.mangaData.mal_id === newCartItem.mangaData.mal_id &&
         item.volume === newCartItem.volume
     );
@@ -58,7 +50,7 @@ export class CartService {
   public deleteItemFromShoppingCart(cartItem: CartItem) {
     return this.getShoppingCart()
       .pipe(take(1))
-      .subscribe((cart) => {
+      .subscribe(cart => {
         const newCart = this.deleteItemFromCart(cart, cartItem);
         this.updateShoppingCart(newCart);
       });
@@ -67,7 +59,7 @@ export class CartService {
   public upsertMangaItemToCart(newCartItem: CartItem) {
     return this.getShoppingCart()
       .pipe(take(1))
-      .subscribe((cart) => {
+      .subscribe(cart => {
         const newCart = this.mergeCart(cart, newCartItem);
         this.updateShoppingCart(newCart);
       });

@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { MangaFavorite, MangaItem } from '../../shared/models';
+import { MangaItem } from '../../shared/models';
 import { MangaCardComponent } from '../manga-card/manga-card.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({

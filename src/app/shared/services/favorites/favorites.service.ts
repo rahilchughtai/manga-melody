@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { MangaFavorite, MangaItem } from '../../models';
 import { AuthService } from '../auth/auth.service';
-import { doc, Firestore, setDoc } from '@angular/fire/firestore';
+import { Firestore, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',

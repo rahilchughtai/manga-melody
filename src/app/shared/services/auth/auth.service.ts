@@ -1,18 +1,11 @@
-import { computed, effect, inject, Injectable } from '@angular/core';
+import { computed, effect, inject, Injectable, NgZone } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, signOut, User, authState } from '@angular/fire/auth';
 import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
-import {
-  doc,
-  docData,
-  DocumentReference,
-  Firestore,
-  setDoc,
-} from '@angular/fire/firestore';
+import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { catchError, from, map, Observable, of, take, tap } from 'rxjs';
+import { catchError, from, map, Observable, of, take } from 'rxjs';
 import { APP_ROUTES } from '../../utils/app-routes';
-import { doc as rxfireDoc } from 'rxfire/firestore';
 import { MangaUser } from '../../models/manga-user.model';
 @Injectable({
   providedIn: 'root',
@@ -22,6 +15,8 @@ export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   public userStateSig = toSignal(authState(this.auth));
+
+  private ngZone = inject(NgZone);
 
   public signOut() {
     signOut(this.auth).then(() => {
@@ -66,13 +61,13 @@ export class AuthService {
     return from(signInWithPopup(this.auth, new GoogleAuthProvider()))
       .pipe(
         take(1),
-        catchError((error) => {
+        catchError(error => {
           console.error(error);
           return of(null);
         }),
-        map((userCredential) => userCredential?.user ?? null)
+        map(userCredential => userCredential?.user ?? null)
       )
-      .subscribe((user) => {
+      .subscribe(user => {
         this.setUserData(user);
         this.router.navigate([APP_ROUTES.PROFILE]);
       });
