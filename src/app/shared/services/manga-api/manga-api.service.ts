@@ -6,7 +6,8 @@ import {
   JikanApiResponse,
   ExtendedSearchFormData,
 } from '../../models';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
+import { getMangaPrice } from '../../utils/manga-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,15 @@ export class MangaApiService {
     const params = this.overwriteParams(requestParameters);
     return this.http
       .get<JikanApiResponse>(`${this.BASE_URL}/manga`, { params })
-      .pipe(catchError(() => of(undefined)));
+      .pipe(
+        map(response => ({
+          ...response,
+          data: response.data.map(item => ({
+            ...item,
+            price: getMangaPrice(item),
+          })),
+        })),
+        catchError(() => of(undefined))
+      );
   }
 }

@@ -1,0 +1,74 @@
+<div class="cart-list">
+  @if (cartItems().length) {
+    <ul>
+      @for (item of cartItems(); track $index) {
+        <li>
+          <div class="item-info">
+            <p
+              matTooltipPosition="above"
+              matTooltip="{{ item.mangaData.title }}">
+              {{ item.mangaData.title }}
+            </p>
+            <img
+              alt="Manga Image"
+              [src]="item.mangaData.images.jpg.image_url" />
+            <p>Volume #{{ item.volume }}</p>
+          </div>
+          <div class="amount-info">
+            <p class="grey-text">
+              Price {{ item.mangaData.price | currency: 'EUR' }}
+            </p>
+
+            @if (changable()) {
+              <div
+                class="changeQuantity"
+                fxLayout="row wrap"
+                fxLayoutAlign="center start">
+                <button (click)="decreaseQuantity(item)" mat-mini-fab>
+                  <mat-icon>{{
+                    item.quantity === 1 ? 'delete' : 'remove'
+                  }}</mat-icon>
+                </button>
+                <mat-form-field appearance="outline">
+                  <mat-label>Amount</mat-label>
+                  <mat-select
+                    (selectionChange)="updateQuantity(item, $event.value)"
+                    [(value)]="item.quantity">
+                    <mat-option
+                      *ngFor="let quantity of mangaQuantityOptions"
+                      [value]="quantity"
+                      >{{ quantity }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <button
+                  [disabled]="item.quantity === maxQuantity"
+                  (click)="increaseQuantity(item)"
+                  mat-mini-fab>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <button (click)="removeItem(item)" mat-flat-button>Delete</button>
+            } @else {
+              <div class="changeQuantity">
+                <p class="grey-text">Anzahl: {{ item.quantity }}</p>
+              </div>
+            }
+            <p class="grey-text sum">
+              Subtotal: {{ item.subtotal | currency: 'EUR' }}
+            </p>
+          </div>
+        </li>
+      }
+    </ul>
+
+    <hr />
+    <div style="text-align: center" class="checkout">
+      <p>Total: Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
+    </div>
+  } @else {
+    <h1>Your cart is empty!</h1>
+
+    {{ cartItems().length }}
+  }
+</div>

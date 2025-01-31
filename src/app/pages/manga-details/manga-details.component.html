@@ -4,8 +4,7 @@
     <div class="manga">
       <app-manga-card
         [fullWidthTitle]="true"
-        [mangaData]="navState.mangaData"
-      />
+        [mangaData]="navState.mangaData" />
     </div>
     <div class="content">
       <div class="score">
@@ -20,7 +19,7 @@
           {{ navState.mangaData.synopsis }}
         </p>
       </div>
-      <h2>Price: 20 Euro</h2>
+      <h2>Price per Manga: {{ navState.mangaData.price | currency: 'EUR' }} EUR</h2>
     </div>
   </div>
   <section class="payment">
@@ -47,8 +46,7 @@
         "
         (click)="addMangaItemToCart()"
         mat-fab
-        extended
-      >
+        extended>
         Add to Cart
       </button>
     </form>

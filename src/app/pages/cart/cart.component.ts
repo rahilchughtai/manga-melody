@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { CartItem } from '../../shared/models';
@@ -10,10 +10,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { CartService } from '../../shared/services/cart/cart.service';
-import {
-  createArrayFromInteger,
-  MAX_MANGA_ORDER_QUANTITY,
-} from '../../shared/utils/manga-utils';
+import { map } from 'rxjs';
+import { Router } from '@angular/router';
+import { CartListComponent } from '../../components/cart-list/cart-list.component';
+import { APP_ROUTES } from '../../shared/utils/app-routes';
 
 @Component({
   selector: 'app-cart',
@@ -26,30 +26,32 @@ import {
     MatFormFieldModule,
     ReactiveFormsModule,
     MatSelectModule,
+    CartListComponent,
   ],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent {
   changable = true;
+  public router = inject(Router);
   public cartService = inject(CartService);
-  public cartItems = toSignal(this.cartService.getShoppingCart());
+  public cartItems: Signal<CartItem[] | undefined> = toSignal(
+    this.cartService.getShoppingCart().pipe(map(this.calculateSubtotals))
+  );
 
-  public increaseQuantity(cartItem: CartItem) {
-    this.cartService.updateCartItemQuantity(cartItem, cartItem.quantity + 1);
+  private calculateSubtotals(cartItems: CartItem[]): CartItem[] {
+    return cartItems.map(item => ({
+      ...item,
+      subtotal: item.mangaData.price * item.quantity,
+    }));
   }
-  public decreaseQuantity(cartItem: CartItem) {
-    this.cartService.updateCartItemQuantity(cartItem, cartItem.quantity - 1);
-  }
-
-  public updateQuantity(cartItem: CartItem, quantity: number) {
-    this.cartService.updateCartItemQuantity(cartItem, quantity);
-  }
-
-  public removeItem(cartItem: CartItem) {
-    this.cartService.deleteItemFromShoppingCart(cartItem);
+  private calculateTotalAmount(cartItems: CartItem[]): number {
+    return cartItems.reduce((total, item) => total + item.subtotal, 0);
   }
 
-  public maxQuantity = MAX_MANGA_ORDER_QUANTITY;
-  public mangaQuantityOptions = createArrayFromInteger(this.maxQuantity);
+  public navigateToCheckout() {
+    this.router.navigate([APP_ROUTES.CHECKOUT], {
+      state: { cartItems: this.cartItems() },
+    });
+  }
 }
