@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/manga-melody",
+    "public": "./dist/manga-melody",
     "ignore": [
       "firebase.json",
       "**/.*",
