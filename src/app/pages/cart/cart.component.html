@@ -1,60 +1,70 @@
 <div class="cart-page">
   <h1>Cart</h1>
   @if (cartItems()?.length) {
-  <ul>
-    @for (item of cartItems(); track $index) {
-    <li>
-      <div class="item-info">
-        <p matTooltipPosition="above" matTooltip="{{ item.mangaData.title }}">
-          {{ item.mangaData.title }}
-        </p>
-        <img [src]="item.mangaData.images.jpg.image_url" />
-        <p>Volume #{{ item.volume }}</p>
-      </div>
-      <div class="amount-info">
-        <p class="grey-text">Stückpreis: 20 €</p>
+    <ul>
+      @for (item of cartItems(); track $index) {
+        <li>
+          <div class="item-info">
+            <p
+              matTooltipPosition="above"
+              matTooltip="{{ item.mangaData.title }}">
+              {{ item.mangaData.title }}
+            </p>
+            <img
+              alt="Manga Image"
+              [src]="item.mangaData.images.jpg.image_url" />
+            <p>Volume #{{ item.volume }}</p>
+          </div>
+          <div class="amount-info">
+            <p class="grey-text">Stückpreis: 20 €</p>
 
-        @if(changable){
-        <div
-          class="changeQuantity"
-          fxLayout="row wrap"
-          fxLayoutAlign="center start"
-        >
-          <button (click)="decreaseQuantity(item)" mat-mini-fab>
-            <mat-icon>{{ item.quantity === 1 ? "delete" : "remove" }}</mat-icon>
-          </button>
-          <mat-form-field appearance="outline">
-            <mat-label>Anzahl</mat-label>
-            <mat-select [(value)]="item.quantity">
-              <mat-option
-                *ngFor="let quantity of createQuantityOptions(item.quantity)"
-                [value]="quantity"
-                >{{ quantity }}</mat-option
-              >
-            </mat-select>
-          </mat-form-field>
-          <button (click)="increaseQuantity(item)" mat-mini-fab>
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>
-        <button (click)="removeItem(item)" mat-flat-button>Delete</button>
-        } @else {
-        <div class="changeQuantity">
-          <p>Anzahl: {{ item.quantity }}</p>
-        </div>
-        }
-        <p class="grey-text sum">Zwischensumme: {{ item.subtotal }} €</p>
-      </div>
-    </li>
-    }
-  </ul>
+            @if (changable) {
+              <div
+                class="changeQuantity"
+                fxLayout="row wrap"
+                fxLayoutAlign="center start">
+                <button (click)="decreaseQuantity(item)" mat-mini-fab>
+                  <mat-icon>{{
+                    item.quantity === 1 ? 'delete' : 'remove'
+                  }}</mat-icon>
+                </button>
+                <mat-form-field appearance="outline">
+                  <mat-label>Anzahl</mat-label>
+                  <mat-select
+                    (selectionChange)="updateQuantity(item, $event.value)"
+                    [(value)]="item.quantity">
+                    <mat-option
+                      *ngFor="let quantity of mangaQuantityOptions"
+                      [value]="quantity"
+                      >{{ quantity }}</mat-option
+                    >
+                  </mat-select>
+                </mat-form-field>
+                <button
+                  [disabled]="item.quantity === maxQuantity"
+                  (click)="increaseQuantity(item)"
+                  mat-mini-fab>
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+              <button (click)="removeItem(item)" mat-flat-button>Delete</button>
+            } @else {
+              <div class="changeQuantity">
+                <p>Anzahl: {{ item.quantity }}</p>
+              </div>
+            }
+            <p class="grey-text sum">Zwischensumme: {{ item.subtotal }} €</p>
+          </div>
+        </li>
+      }
+    </ul>
 
-  <hr />
-  <div style="text-align: center" class="checkout">
-    <p>Total: Total Amount €</p>
-    <button color="primary" mat-raised-button>To Checkout</button>
-  </div>
+    <hr />
+    <div style="text-align: center" class="checkout">
+      <p>Total: Total Amount €</p>
+      <button color="primary" mat-raised-button>To Checkout</button>
+    </div>
   } @else {
-  <h1>Your cart is empty!</h1>
+    <h1>Your cart is empty!</h1>
   }
 </div>

@@ -61,9 +61,9 @@ export interface MangaItem extends MangaFavorite {
   published: Published;
   status?: string;
   members?: number;
-  authors?: any[];
+  authors?: unknown[];
   score?: number;
-  serialization?: any[];
+  serialization?: unknown[];
   popularity?: number;
   favorites?: number;
   genres?: GenreItem[];

@@ -9,7 +9,12 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-search',
-  imports: [SearchFieldComponent, MangaListComponent, MatPaginatorModule, CommonModule],
+  imports: [
+    SearchFieldComponent,
+    MangaListComponent,
+    MatPaginatorModule,
+    CommonModule,
+  ],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss',
 })

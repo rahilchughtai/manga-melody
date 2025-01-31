@@ -14,4 +14,6 @@ export function minifyMangaData(manga: MangaItem): MinimalMangaItemData {
 }
 
 export const createArrayFromInteger = (length: number): number[] =>
-  [...Array(length).keys()].map((i) => i + 1);
+  [...Array(length).keys()].map(i => i + 1);
+
+export const MAX_MANGA_ORDER_QUANTITY = 50;

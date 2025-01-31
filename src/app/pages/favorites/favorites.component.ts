@@ -1,7 +1,7 @@
 import { Component, inject, Signal } from '@angular/core';
 import { FavoritesService } from '../../shared/services/favorites/favorites.service';
 import { CommonModule } from '@angular/common';
-import { MangaListComponent } from "../../components/manga-list/manga-list.component";
+import { MangaListComponent } from '../../components/manga-list/manga-list.component';
 import { MangaFavorite } from '../../shared/models';
 
 @Component({
@@ -13,5 +13,6 @@ import { MangaFavorite } from '../../shared/models';
 export class FavoritesComponent {
   private favoriteService = inject(FavoritesService);
 
-  public mangaFavoritesSig = this.favoriteService.mangaFavorites as unknown as  Signal<MangaFavorite[]>;
+  public mangaFavoritesSig = this.favoriteService
+    .mangaFavorites as unknown as Signal<MangaFavorite[]>;
 }
