@@ -7,6 +7,7 @@ export enum APP_ROUTES {
   PROFILE = 'profile',
   CART = 'cart',
   ORDERS = 'orders',
+  CHECKOUT = 'checkout',
 }
 
 export type AppRoute = `${APP_ROUTES}`;
