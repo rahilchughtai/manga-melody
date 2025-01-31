@@ -47,14 +47,22 @@ export class FavoritesService {
   }
 
   public addMangaFavorite(mangaItem: MangaItem) {
-    const { mal_id, title, title_english, title_japanese, published, images } =
-      mangaItem;
+    const {
+      mal_id,
+      title,
+      title_english,
+      title_japanese,
+      published,
+      images,
+      price,
+    } = mangaItem;
     if (this.sigMangaFavoriteIds().has(mal_id)) {
       // TODO Toast message
       return;
     }
 
     const mangaFavorite: MangaFavorite = {
+      price,
       mal_id,
       title,
       title_english,

@@ -53,6 +53,7 @@ export interface MangaFavorite {
   published: Published;
   volumes?: number;
   images: ImageType;
+  price: number;
 }
 export interface MangaItem extends MangaFavorite {
   url?: string;
@@ -67,7 +68,6 @@ export interface MangaItem extends MangaFavorite {
   popularity?: number;
   favorites?: number;
   genres?: GenreItem[];
-  price: number;
 }
 
 export type MinimalMangaItemData = Pick<
