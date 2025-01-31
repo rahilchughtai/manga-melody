@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MangaCardComponent } from '../../components/manga-card/manga-card.component';
@@ -28,6 +28,7 @@ interface MangaNavigationData {
 @Component({
   selector: 'app-manga-details',
   imports: [
+    CurrencyPipe,
     CommonModule,
     MangaCardComponent,
     MatButtonModule,

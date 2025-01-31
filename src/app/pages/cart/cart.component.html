@@ -16,7 +16,9 @@
             <p>Volume #{{ item.volume }}</p>
           </div>
           <div class="amount-info">
-            <p class="grey-text">Stückpreis: 20 €</p>
+            <p class="grey-text">
+              Price per Manga {{ item.mangaData.price | currency: 'EUR' }}
+            </p>
 
             @if (changable) {
               <div
@@ -29,7 +31,7 @@
                   }}</mat-icon>
                 </button>
                 <mat-form-field appearance="outline">
-                  <mat-label>Anzahl</mat-label>
+                  <mat-label>Amount</mat-label>
                   <mat-select
                     (selectionChange)="updateQuantity(item, $event.value)"
                     [(value)]="item.quantity">
@@ -53,7 +55,9 @@
                 <p>Anzahl: {{ item.quantity }}</p>
               </div>
             }
-            <p class="grey-text sum">Zwischensumme: {{ item.subtotal }} €</p>
+            <p class="grey-text sum">
+              Subtotal: {{ item.subtotal | currency: 'EUR' }}
+            </p>
           </div>
         </li>
       }
@@ -61,7 +65,7 @@
 
     <hr />
     <div style="text-align: center" class="checkout">
-      <p>Total: Total Amount €</p>
+      <p>Total: Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
       <button color="primary" mat-raised-button>To Checkout</button>
     </div>
   } @else {

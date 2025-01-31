@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { CartItem } from '../../shared/models';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
@@ -14,10 +14,12 @@ import {
   createArrayFromInteger,
   MAX_MANGA_ORDER_QUANTITY,
 } from '../../shared/utils/manga-utils';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
   imports: [
+    CurrencyPipe,
     CommonModule,
     MatButtonModule,
     MatListModule,
@@ -33,7 +35,23 @@ import {
 export class CartComponent {
   changable = true;
   public cartService = inject(CartService);
-  public cartItems = toSignal(this.cartService.getShoppingCart());
+  public cartItems: Signal<CartItem[] | undefined> = toSignal(
+    this.cartService.getShoppingCart().pipe(map(this.calculateSubtotals))
+  );
+
+  public cartTotalAmount = computed(() =>
+    this.calculateTotalAmount(this.cartItems() ?? [])
+  );
+
+  private calculateSubtotals(cartItems: CartItem[]): CartItem[] {
+    return cartItems.map(item => ({
+      ...item,
+      subtotal: item.mangaData.price * item.quantity,
+    }));
+  }
+  private calculateTotalAmount(cartItems: CartItem[]): number {
+    return cartItems.reduce((total, item) => total + item.subtotal, 0);
+  }
 
   public increaseQuantity(cartItem: CartItem) {
     this.cartService.updateCartItemQuantity(cartItem, cartItem.quantity + 1);

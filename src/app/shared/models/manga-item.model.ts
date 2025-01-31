@@ -67,6 +67,7 @@ export interface MangaItem extends MangaFavorite {
   popularity?: number;
   favorites?: number;
   genres?: GenreItem[];
+  price: number;
 }
 
 export type MinimalMangaItemData = Pick<
@@ -78,6 +79,7 @@ export type MinimalMangaItemData = Pick<
   | 'published'
   | 'volumes'
   | 'images'
+  | 'price'
 >;
 
 export interface Published {
