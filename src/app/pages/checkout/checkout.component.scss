@@ -1,0 +1,21 @@
+.checkout {
+  max-width: 80%;
+  margin: auto;
+  h1 {
+    text-align: center;
+  }
+
+  .tab-group {
+    text-align: center;
+    form {
+      max-width: 50%;
+      margin: auto;
+      mat-form-field {
+        width: 100%;
+      }
+    }
+    .summary {
+      margin-bottom: 5em;
+    }
+  }
+}
