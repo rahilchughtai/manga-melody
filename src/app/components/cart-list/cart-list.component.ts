@@ -1,4 +1,4 @@
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, inject, input } from '@angular/core';
 import { CartItem } from '../../shared/models';
 import { MatButtonModule } from '@angular/material/button';
 import { CurrencyPipe, NgFor } from '@angular/common';
@@ -35,14 +35,6 @@ export class CartListComponent {
   public changable = input.required<boolean>();
   public cartItems = input.required<CartItem[]>();
   private cartService = inject(CartService);
-
-  public cartTotalAmount = computed(() =>
-    this.calculateTotalAmount(this.cartItems() ?? [])
-  );
-
-  private calculateTotalAmount(cartItems: CartItem[]): number {
-    return cartItems.reduce((total, item) => total + item.subtotal, 0);
-  }
 
   private router = inject(Router);
   public increaseQuantity(cartItem: CartItem) {

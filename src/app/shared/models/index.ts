@@ -3,3 +3,4 @@ export * from './manga-api.model';
 export * from './manga-item.model';
 export * from './nav-links.model';
 export * from './cart.model';
+export * from './order.model';

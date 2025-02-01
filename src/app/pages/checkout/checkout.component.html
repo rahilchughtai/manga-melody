@@ -76,8 +76,13 @@
           <app-cart-list
             [cartItems]="cartDataState.cartItems || []"
             [changable]="false" />
+          <hr />
 
-          <button mat-flat-button>Confirm payment</button>
+          <div style="text-align: center" class="checkout">
+            <p>Total: Total Amount {{ totalAmount | currency: 'EUR' }}</p>
+          </div>
+
+          <button (click)="makeOrder()" mat-flat-button>Confirm payment</button>
         </div>
       </mat-tab>
     </mat-tab-group>

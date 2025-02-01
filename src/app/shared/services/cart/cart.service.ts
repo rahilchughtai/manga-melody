@@ -26,6 +26,14 @@ export class CartService {
     return cart.filter((_, i) => i !== itemIndex);
   }
 
+  public clearCart() {
+    this.updateShoppingCart([]);
+  }
+
+  public getCartItemCount() {
+    return this.getShoppingCart().pipe(map(cart => cart.length));
+  }
+
   private deleteItemFromCart(cart: CartItem[], cartItem: CartItem) {
     const existingCartIndex = this.findCartItemIndex(cart, cartItem);
     if (existingCartIndex === -1) {

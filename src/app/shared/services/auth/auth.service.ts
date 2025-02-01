@@ -1,4 +1,4 @@
-import { computed, effect, inject, Injectable, NgZone } from '@angular/core';
+import { computed, effect, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, signOut, User, authState } from '@angular/fire/auth';
 import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
@@ -15,8 +15,6 @@ export class AuthService {
   private auth = inject(Auth);
   private firestore = inject(Firestore);
   public userStateSig = toSignal(authState(this.auth));
-
-  private ngZone = inject(NgZone);
 
   public signOut() {
     signOut(this.auth).then(() => {
@@ -35,7 +33,7 @@ export class AuthService {
     });
   }
 
-  private get userDataSnapshot(): MangaUser | null {
+  public get userDataSnapshot(): MangaUser | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }

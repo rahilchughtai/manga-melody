@@ -1,4 +1,4 @@
-import { MangaItem, MinimalMangaItemData } from '../models';
+import { CartItem, MangaItem, MinimalMangaItemData } from '../models';
 
 export function minifyMangaData(manga: MangaItem): MinimalMangaItemData {
   const {
@@ -43,4 +43,8 @@ export function getMangaPrice(manga: MangaItem): number {
     default:
       return 7;
   }
+}
+
+export function calculateTotalAmount(cartItems: CartItem[]): number {
+  return cartItems.reduce((total, item) => total + item.subtotal, 0);
 }

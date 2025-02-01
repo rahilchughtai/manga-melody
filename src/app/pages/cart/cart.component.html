@@ -1,9 +1,18 @@
 <div class="cart">
-  <app-cart-list
-    [changable]="false"
-    [cartItems]="cartItems() || []"></app-cart-list>
+  @if (cartItems()?.length) {
+    <app-cart-list
+      [changable]="true"
+      [cartItems]="cartItems() || []"></app-cart-list>
 
-  <button (click)="navigateToCheckout()" color="primary" mat-flat-button>
-    To Checkout
-  </button>
+    <hr />
+    <div style="text-align: center" class="checkout">
+      <p>Total: Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
+    </div>
+
+    <button (click)="navigateToCheckout()" color="primary" mat-flat-button>
+      To Checkout
+    </button>
+  } @else {
+    <h1>Your cart is empty!</h1>
+  }
 </div>
