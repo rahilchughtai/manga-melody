@@ -76,7 +76,7 @@ export class CheckoutComponent {
   public makeOrder() {
     const orderData: CheckOutData = {
       orderItems: this.cartDataState.cartItems,
-      totalAmount: 200,
+      totalAmount: calculateTotalAmount(this.cartDataState.cartItems),
       orderIBAN: this.ibanForm.value.iban,
       orderShippingAddress: this.shippingForm.value,
     };

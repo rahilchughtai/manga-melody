@@ -42,17 +42,29 @@ export class CartService {
     return this.filterItemFromCart(cart, existingCartIndex);
   }
 
-  private mergeCart(cart: CartItem[], newCartItem: CartItem): CartItem[] {
-    const newQuantity = newCartItem.quantity;
+  private mergeCart(
+    cart: CartItem[],
+    newCartItem: CartItem,
+    overrideQuantity: boolean
+  ): CartItem[] {
     const existingCartIndex = this.findCartItemIndex(cart, newCartItem);
+
+    if (newCartItem.quantity <= 0) {
+      return this.deleteItemFromCart(cart, newCartItem);
+    }
+
     if (existingCartIndex === -1) {
       return [...cart, newCartItem];
     }
-    if (newQuantity <= 0) {
-      return this.deleteItemFromCart(cart, newCartItem);
-    }
-    cart[existingCartIndex].quantity = newCartItem.quantity;
-    return cart;
+    const existingItem = cart[existingCartIndex];
+    const quantity = overrideQuantity
+      ? newCartItem.quantity
+      : existingItem.quantity + newCartItem.quantity;
+    const subtotal = newCartItem.mangaData.price * quantity;
+
+    return cart.map((item, index) =>
+      index === existingCartIndex ? { ...item, quantity, subtotal } : item
+    );
   }
 
   public deleteItemFromShoppingCart(cartItem: CartItem) {
@@ -64,21 +76,24 @@ export class CartService {
       });
   }
 
-  public upsertMangaItemToCart(newCartItem: CartItem) {
+  public upsertMangaItemToCart(
+    newCartItem: CartItem,
+    overrideQuantity: boolean
+  ) {
     return this.getShoppingCart()
       .pipe(take(1))
       .subscribe(cart => {
-        const newCart = this.mergeCart(cart, newCartItem);
+        const newCart = this.mergeCart(cart, newCartItem, overrideQuantity);
         this.updateShoppingCart(newCart);
       });
   }
 
-  public updateShoppingCart(newCart: CartItem[]) {
+  private updateShoppingCart(newCart: CartItem[]) {
     updateDoc(this.authService.userDocumentRef, { cart: newCart });
   }
 
-  public updateCartItemQuantity(cartItem: CartItem, newQuantity: number) {
+  public modifyCartItemQuantity(cartItem: CartItem, newQuantity: number) {
     const newCartItem = { ...cartItem, quantity: newQuantity };
-    return this.upsertMangaItemToCart(newCartItem);
+    return this.upsertMangaItemToCart(newCartItem, true);
   }
 }

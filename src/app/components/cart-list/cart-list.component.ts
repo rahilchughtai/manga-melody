@@ -38,14 +38,14 @@ export class CartListComponent {
 
   private router = inject(Router);
   public increaseQuantity(cartItem: CartItem) {
-    this.cartService.updateCartItemQuantity(cartItem, cartItem.quantity + 1);
+    this.cartService.modifyCartItemQuantity(cartItem, cartItem.quantity + 1);
   }
   public decreaseQuantity(cartItem: CartItem) {
-    this.cartService.updateCartItemQuantity(cartItem, cartItem.quantity - 1);
+    this.cartService.modifyCartItemQuantity(cartItem, cartItem.quantity - 1);
   }
 
   public updateQuantity(cartItem: CartItem, quantity: number) {
-    this.cartService.updateCartItemQuantity(cartItem, quantity);
+    this.cartService.modifyCartItemQuantity(cartItem, quantity);
   }
 
   public removeItem(cartItem: CartItem) {
