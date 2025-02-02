@@ -7,9 +7,11 @@
 
   .tab-group {
     text-align: center;
+
     form {
-      max-width: 50%;
+      max-width: clamp(300px, 50%, 600px);
       margin: auto;
+      margin-top: 2em;
       mat-form-field {
         width: 100%;
       }
