@@ -6,4 +6,6 @@ export interface NavigationLink {
   text: string;
   icon: string;
   badge?: Signal<number | undefined>;
+  loggedInOnly?: boolean;
+  newUserOnly?: boolean;
 }

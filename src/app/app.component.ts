@@ -18,6 +18,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { CartService } from './shared/services/cart/cart.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
+import { FavoritesService } from './shared/services/favorites/favorites.service';
 
 @Component({
   selector: 'app-root',
@@ -43,8 +44,14 @@ export class AppComponent {
   private readonly screenWidth = signal(window.innerWidth);
   private mobileWidthBreakpoint = 768;
 
+  private favoritesService = inject(FavoritesService);
+
   private cartItemCount = toSignal(
     inject(CartService).getCartItemCount() ?? of(undefined)
+  );
+
+  private favoritesCount = computed(
+    () => this.favoritesService.mangaFavorites().length
   );
 
   @HostListener('window:resize', ['$event'])
@@ -59,36 +66,32 @@ export class AppComponent {
     window.addEventListener('resize', this.updateScreenWidth);
   }
 
-  private navLinks: NavigationLink[] = [
+  public navLinks: NavigationLink[] = [
     { path: '', text: 'Home', icon: 'home' },
     { path: 'search', text: 'Search', icon: 'search' },
-    { path: 'favorites', text: 'Favorites', icon: 'favorite' },
+    {
+      path: 'favorites',
+      text: 'Favorites',
+      icon: 'favorite',
+      badge: this.favoritesCount,
+    },
     {
       path: 'cart',
       text: 'Cart',
       icon: 'shopping_cart',
       badge: this.cartItemCount,
+      loggedInOnly: true,
     },
-    { path: 'orders', text: 'Orders', icon: 'receipt' },
-    { path: 'profile', text: 'Profile', icon: 'person' },
-    { path: 'login', text: 'Login', icon: 'login' },
+    { path: 'orders', text: 'Orders', icon: 'receipt', loggedInOnly: true },
+    { path: 'profile', text: 'Profile', icon: 'person', loggedInOnly: true },
+    { path: 'login', text: 'Login', icon: 'login', newUserOnly: true },
   ];
 
   public navigationLinks = computed(() =>
     this.navLinks.filter(link => {
-      const isInvalidOrdersLink =
-        link.path === 'orders' && !this.isLoggedInSig();
-      const isInvalidCartLink = link.path === 'cart' && !this.isLoggedInSig();
-      const isInvalidLoginLink = link.path === 'login' && this.isLoggedInSig();
-      const isInvalidProfileLink =
-        link.path === 'profile' && !this.isLoggedInSig();
-      return (
-        !isInvalidCartLink &&
-        !isInvalidOrdersLink &&
-        !isInvalidOrdersLink &&
-        !isInvalidLoginLink &&
-        !isInvalidProfileLink
-      );
+      const isValidForUser = link.loggedInOnly ? this.isLoggedInSig() : true;
+      const isValidForNewUser = link.newUserOnly ? !this.isLoggedInSig() : true;
+      return isValidForNewUser && isValidForUser;
     })
   );
 
