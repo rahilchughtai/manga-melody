@@ -3,11 +3,11 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
-import { FavoritesService } from '../../shared/services/favorites/favorites.service';
+import { FavoritesService } from '../../shared/services';
 import { MangaItem } from '../../shared/models';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { SnackbarService } from '../../shared/services/snackbar/snackbar.service';
+import { SnackbarService } from '../../shared/services';
 @Component({
   selector: 'app-manga-card',
   imports: [

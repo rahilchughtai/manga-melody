@@ -12,13 +12,13 @@ import { MatListModule, MatNavList } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { AuthService } from './shared/services/auth/auth.service';
 import { NavigationLink } from './shared/models';
 import { MatBadgeModule } from '@angular/material/badge';
-import { CartService } from './shared/services/cart/cart.service';
+import { CartService } from './shared/services';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { of } from 'rxjs';
-import { FavoritesService } from './shared/services/favorites/favorites.service';
+import { FavoritesService } from './shared/services';
+import { AuthService } from './shared/services';
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTabsModule } from '@angular/material/tabs';
-import { AuthService } from '../../shared/services/auth/auth.service';
+import { AuthService } from '../../shared/services';
 
 @Component({
   selector: 'app-login-register',

@@ -61,7 +61,6 @@ export class FavoritesService {
       price,
     } = mangaItem;
     if (this.sigMangaFavoriteIds().has(mal_id)) {
-      // TODO Toast message
       return;
     }
 

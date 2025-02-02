@@ -15,13 +15,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
-import { CartService } from '../../shared/services/cart/cart.service';
+import { CartService } from '../../shared/services';
 import {
   createArrayFromInteger,
   minifyMangaData,
 } from '../../shared/utils/manga-utils';
-import { AuthService } from '../../shared/services/auth/auth.service';
-import { SnackbarService } from '../../shared/services/snackbar/snackbar.service';
+import { AuthService } from '../../shared/services';
+import { SnackbarService } from '../../shared/services';
 
 interface MangaNavigationData {
   mangaData: MangaItem;

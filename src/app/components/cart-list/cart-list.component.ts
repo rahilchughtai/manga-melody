@@ -8,7 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
-import { CartService } from '../../shared/services/cart/cart.service';
+import { CartService } from '../../shared/services';
 import {
   createArrayFromInteger,
   MAX_MANGA_ORDER_QUANTITY,

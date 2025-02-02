@@ -14,11 +14,11 @@ import { MatInputModule } from '@angular/material/input';
 import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { OrderService } from '../../shared/services/order/order.service';
+import { OrderService } from '../../shared/services';
 import { APP_ROUTES } from '../../shared/utils/app-routes';
 import { calculateTotalAmount } from '../../shared/utils/manga-utils';
 import { NextTabButtonComponent } from '../../components/payment/next-tab-button/next-tab-button.component';
-import { SnackbarService } from '../../shared/services/snackbar/snackbar.service';
+import { SnackbarService } from '../../shared/services';
 import { ValidatorService } from 'angular-iban';
 
 interface CheckoutNavigationState {
