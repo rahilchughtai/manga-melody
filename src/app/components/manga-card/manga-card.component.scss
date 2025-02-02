@@ -1,5 +1,5 @@
-@use "@angular/material" as mat;
-@use "sass:map";
+@use '@angular/material' as mat;
+@use 'sass:map';
 
 $bg-color: map.get(
   $map: mat.$azure-palette,
@@ -16,6 +16,8 @@ $cherry: map.get(
   $key: 30,
 );
 
+$manga-image-width: clamp(100px, 15vw, 220px);
+
 mat-card {
   background-color: $bg-color;
   cursor: pointer;
@@ -28,7 +30,7 @@ mat-card {
     padding-bottom: 0.5em;
     font-weight: bold;
     &:not(.full-width) {
-      max-width: 200px;
+      max-width: $manga-image-width;
     }
   }
 
@@ -41,8 +43,8 @@ mat-card {
   }
 
   img {
-    width: 225px;
-    height: 320px;
+    width: $manga-image-width;
+    height: calc($manga-image-width * 1.5);
     object-fit: cover;
   }
 }
