@@ -14,9 +14,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './shared/services/auth/auth.service';
 import { NavigationLink } from './shared/models';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CartService } from './shared/services/cart/cart.service';
+import { toSignal } from '@angular/core/rxjs-interop';
+
 @Component({
   selector: 'app-root',
   imports: [
+    MatBadgeModule,
     RouterOutlet,
     MatButtonModule,
     MatSidenavModule,
@@ -37,6 +42,8 @@ export class AppComponent {
   private readonly screenWidth = signal(window.innerWidth);
   private mobileWidthBreakpoint = 768;
 
+  private cartItemCount = toSignal(inject(CartService).getCartItemCount());
+
   @HostListener('window:resize', ['$event'])
   onResize(): void {
     this.screenWidth.set(window.innerWidth);
@@ -53,7 +60,12 @@ export class AppComponent {
     { path: '', text: 'Home', icon: 'home' },
     { path: 'search', text: 'Search', icon: 'search' },
     { path: 'favorites', text: 'Favorites', icon: 'favorite' },
-    { path: 'cart', text: 'Cart', icon: 'shopping_cart' },
+    {
+      path: 'cart',
+      text: 'Cart',
+      icon: 'shopping_cart',
+      badge: this.cartItemCount,
+    },
     { path: 'orders', text: 'Orders', icon: 'receipt' },
     { path: 'profile', text: 'Profile', icon: 'person' },
     { path: 'login', text: 'Login', icon: 'login' },

@@ -1,3 +1,92 @@
-<app-cart-list
-  [cartItems]="cartDataState.cartItems || []"
-  [changable]="false"></app-cart-list>
+<div class="checkout">
+  @if (cartDataState.cartItems.length) {
+    <h1>Checkout</h1>
+
+    <mat-tab-group class="tab-group" dynamicHeight mat-stretch-tabs>
+      <mat-tab label="Shipping Information">
+        <form [formGroup]="shippingForm" class="form-layout">
+          <mat-form-field appearance="fill">
+            <mat-label>Full Name</mat-label>
+            <input
+              formControlName="name"
+              matInput
+              placeholder="Enter your full name"
+              required />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Address</mat-label>
+            <input
+              formControlName="address"
+              matInput
+              placeholder="Enter your address"
+              required />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>City</mat-label>
+            <input
+              formControlName="city"
+              matInput
+              placeholder="Enter your city"
+              required />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Postal Code</mat-label>
+            <input
+              formControlName="postalCode"
+              matInput
+              placeholder="Enter your postal code"
+              required />
+          </mat-form-field>
+          <button mat-raised-button color="primary">Next</button>
+        </form>
+      </mat-tab>
+      <mat-tab class="payment" label="Payment Information">
+        <form class="form-layout" [formGroup]="ibanForm">
+          <mat-form-field appearance="fill">
+            <mat-label>IBAN</mat-label>
+            <input
+              matInput
+              formControlName="iban"
+              placeholder="Enter your IBAN"
+              required />
+            <mat-error *ngIf="ibanForm.get('iban')?.hasError('required')">
+              IBAN is required
+            </mat-error>
+            <mat-error *ngIf="ibanForm.get('iban')?.hasError('pattern')">
+              Invalid IBAN format
+            </mat-error>
+          </mat-form-field>
+          <button mat-raised-button color="primary">Next</button>
+        </form>
+      </mat-tab>
+      <mat-tab label="Summary">
+        <div class="summary">
+          <h1>Information Summary</h1>
+          <div class="shipping">
+            <p>Name: {{ shippingForm.get('name')?.value }}</p>
+            <p>Address: {{ shippingForm.get('address')?.value }}</p>
+            <p>City: {{ shippingForm.get('city')?.value }}</p>
+            <p>Postal Code: {{ shippingForm.get('postalCode')?.value }}</p>
+          </div>
+          <div class="payment-method">
+            <p>Payment Method: IBAN Transfer</p>
+            <p>IBAN: {{ ibanForm.get('iban')?.value }}</p>
+          </div>
+          <h1>Order Summary</h1>
+          <app-cart-list
+            [cartItems]="cartDataState.cartItems || []"
+            [changable]="false" />
+          <hr />
+
+          <div style="text-align: center" class="checkout">
+            <p>Total: Total Amount {{ totalAmount | currency: 'EUR' }}</p>
+          </div>
+
+          <button (click)="makeOrder()" mat-flat-button>Confirm payment</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  } @else {
+    <h1>Your cart is empty or invalid!</h1>
+  }
+</div>

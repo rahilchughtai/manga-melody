@@ -1,4 +1,4 @@
-import { Component, inject, Signal } from '@angular/core';
+import { Component, computed, inject, Signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { CartItem } from '../../shared/models';
@@ -14,6 +14,7 @@ import { map } from 'rxjs';
 import { Router } from '@angular/router';
 import { CartListComponent } from '../../components/cart-list/cart-list.component';
 import { APP_ROUTES } from '../../shared/utils/app-routes';
+import { calculateTotalAmount } from '../../shared/utils/manga-utils';
 
 @Component({
   selector: 'app-cart',
@@ -39,14 +40,15 @@ export class CartComponent {
     this.cartService.getShoppingCart().pipe(map(this.calculateSubtotals))
   );
 
+  public cartTotalAmount = computed(() =>
+    calculateTotalAmount(this.cartItems() ?? [])
+  );
+
   private calculateSubtotals(cartItems: CartItem[]): CartItem[] {
     return cartItems.map(item => ({
       ...item,
       subtotal: item.mangaData.price * item.quantity,
     }));
-  }
-  private calculateTotalAmount(cartItems: CartItem[]): number {
-    return cartItems.reduce((total, item) => total + item.subtotal, 0);
   }
 
   public navigateToCheckout() {

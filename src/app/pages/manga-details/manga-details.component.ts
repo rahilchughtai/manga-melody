@@ -60,15 +60,18 @@ export class MangaDetailsComponent {
   );
 
   public addMangaItemToCart() {
+    const price = this.navState.mangaData.price;
     let { quantity, volume } = this.mangaDetailsForm.value;
-    const price = 20;
     quantity ??= 1;
     volume ??= 1;
-    this.cartService.upsertMangaItemToCart({
-      mangaData: minifyMangaData(this.navState.mangaData),
-      quantity,
-      volume,
-      subtotal: price * quantity,
-    });
+    this.cartService.upsertMangaItemToCart(
+      {
+        mangaData: minifyMangaData(this.navState.mangaData),
+        quantity,
+        volume,
+        subtotal: price * quantity,
+      },
+      false
+    );
   }
 }

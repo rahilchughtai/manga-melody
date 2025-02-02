@@ -51,7 +51,7 @@
               <button (click)="removeItem(item)" mat-flat-button>Delete</button>
             } @else {
               <div class="changeQuantity">
-                <p class="grey-text">Anzahl: {{ item.quantity }}</p>
+                <p class="grey-text">Amount: {{ item.quantity }}</p>
               </div>
             }
             <p class="grey-text sum">
@@ -61,14 +61,7 @@
         </li>
       }
     </ul>
-
-    <hr />
-    <div style="text-align: center" class="checkout">
-      <p>Total: Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
-    </div>
   } @else {
     <h1>Your cart is empty!</h1>
-
-    {{ cartItems().length }}
   }
 </div>

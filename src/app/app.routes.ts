@@ -13,6 +13,7 @@ import {
 import { APP_ROUTES } from './shared/utils/app-routes';
 import { CartComponent } from './pages/cart/cart.component';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToProfile = () => redirectLoggedInTo(['profile']);
@@ -52,6 +53,11 @@ export const routes: Routes = [
   {
     path: APP_ROUTES.CHECKOUT,
     component: CheckoutComponent,
+    ...canActivate(redirectUnauthorizedToLogin),
+  },
+  {
+    path: APP_ROUTES.ORDERS,
+    component: OrdersComponent,
     ...canActivate(redirectUnauthorizedToLogin),
   },
 ];

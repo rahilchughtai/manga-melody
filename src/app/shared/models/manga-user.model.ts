@@ -16,9 +16,9 @@ export interface MangaUser {
 }
 
 export interface UserAddress {
-  streetName: string;
-  streetNumber: number;
-  plz: number;
-  ort: string;
-  country: string;
+  name: string;
+  address: string;
+  city: string;
+  postalCode: number | null;
+  country?: string;
 }

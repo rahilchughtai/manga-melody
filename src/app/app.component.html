@@ -2,14 +2,14 @@
   <mat-sidenav #sidenav mode="over" class="sidenav-mobile">
     <mat-nav-list>
       @for (link of navigationLinks(); track link.path) {
-      <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
-        <span class="link-item">
-          <mat-icon> {{ link.icon }} </mat-icon>
-          <span>
-            {{ link.text }}
+        <a mat-list-item [routerLink]="link.path" (click)="sidenav.close()">
+          <span class="link-item">
+            <mat-icon> {{ link.icon }} </mat-icon>
+            <span>
+              {{ link.text }}
+            </span>
           </span>
-        </span>
-      </a>
+        </a>
       }
     </mat-nav-list>
   </mat-sidenav>
@@ -20,19 +20,22 @@
         class="menu-button"
         *ngIf="!isScreenWide()"
         mat-icon-button
-        (click)="sidenav.toggle()"
-      >
+        (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
       <span class="title-button">
         <a routerLink="/"> MangaMelody </a>
       </span>
       @if (isScreenWide()) {
-      <div class="spacer"></div>
-      @for (link of navigationLinks(); track link.path) {
-      <a [routerLink]="link.path">
-        <mat-icon> {{ link.icon }} </mat-icon> </a
-      >} }
+        <div class="spacer"></div>
+        @for (link of navigationLinks(); track link.path) {
+          <a [routerLink]="link.path">
+            <mat-icon [matBadge]="link?.badge && link?.badge()">
+              {{ link.icon }}
+            </mat-icon>
+          </a>
+        }
+      }
     </mat-toolbar>
 
     <div class="content">
