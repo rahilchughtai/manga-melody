@@ -32,11 +32,14 @@ import { Router } from '@angular/router';
   styleUrl: './cart-list.component.scss',
 })
 export class CartListComponent {
+  private cartService = inject(CartService);
   public changable = input.required<boolean>();
   public cartItems = input.required<CartItem[]>();
-  private cartService = inject(CartService);
-
   private router = inject(Router);
+
+  public maxQuantity = MAX_MANGA_ORDER_QUANTITY;
+  public mangaQuantityOptions = createArrayFromInteger(this.maxQuantity);
+
   public increaseQuantity(cartItem: CartItem) {
     this.cartService.modifyCartItemQuantity(cartItem, cartItem.quantity + 1);
   }
@@ -51,7 +54,4 @@ export class CartListComponent {
   public removeItem(cartItem: CartItem) {
     this.cartService.deleteItemFromShoppingCart(cartItem);
   }
-
-  public maxQuantity = MAX_MANGA_ORDER_QUANTITY;
-  public mangaQuantityOptions = createArrayFromInteger(this.maxQuantity);
 }

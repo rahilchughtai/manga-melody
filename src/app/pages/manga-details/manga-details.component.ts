@@ -20,6 +20,8 @@ import {
   createArrayFromInteger,
   minifyMangaData,
 } from '../../shared/utils/manga-utils';
+import { AuthService } from '../../shared/services/auth/auth.service';
+import { SnackbarService } from '../../shared/services/snackbar/snackbar.service';
 
 interface MangaNavigationData {
   mangaData: MangaItem;
@@ -49,7 +51,9 @@ export class MangaDetailsComponent {
     volume: new FormControl(0),
   });
 
+  private snackService = inject(SnackbarService);
   private cartService = inject(CartService);
+  private authService = inject(AuthService);
   private router = inject(Router);
   public navState = this.router.getCurrentNavigation()?.extras
     .state as MangaNavigationData;
@@ -60,6 +64,15 @@ export class MangaDetailsComponent {
   );
 
   public addMangaItemToCart() {
+    this.snackService.openSnackBar('Manga added to cart!');
+
+    if (this.authService.userDataSnapshot === null) {
+      this.snackService.openSnackBar(
+        'Please login to add items to cart!',
+        'snackbar-danger'
+      );
+      return;
+    }
     const price = this.navState.mangaData.price;
     let { quantity, volume } = this.mangaDetailsForm.value;
     quantity ??= 1;

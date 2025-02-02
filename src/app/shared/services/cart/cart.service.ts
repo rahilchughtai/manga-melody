@@ -3,12 +3,15 @@ import { updateDoc } from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth.service';
 import { CartItem } from '../../models/cart.model';
 import { map, take } from 'rxjs';
+import { MAX_MANGA_ORDER_QUANTITY } from '../../utils/manga-utils';
+import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   private authService = inject(AuthService);
+  private snackService = inject(SnackbarService);
 
   public getShoppingCart() {
     return this.authService.getUserData().pipe(map(user => user?.cart ?? []));
@@ -60,6 +63,14 @@ export class CartService {
     const quantity = overrideQuantity
       ? newCartItem.quantity
       : existingItem.quantity + newCartItem.quantity;
+
+    if (quantity > MAX_MANGA_ORDER_QUANTITY) {
+      this.snackService.openSnackBar(
+        `Exceeded max manga order quantity of ${MAX_MANGA_ORDER_QUANTITY}`,
+        'snackbar-danger'
+      );
+      return cart;
+    }
     const subtotal = newCartItem.mangaData.price * quantity;
 
     return cart.map((item, index) =>

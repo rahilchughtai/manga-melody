@@ -7,6 +7,7 @@ import { FavoritesService } from '../../shared/services/favorites/favorites.serv
 import { MangaItem } from '../../shared/models';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { SnackbarService } from '../../shared/services/snackbar/snackbar.service';
 @Component({
   selector: 'app-manga-card',
   imports: [
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
 export class MangaCardComponent {
   private router = inject(Router);
   private favoritesService = inject(FavoritesService);
+  private snackService = inject(SnackbarService);
 
   public fullWidthTitle = input<boolean>(false);
 
@@ -38,8 +40,14 @@ export class MangaCardComponent {
   public btnMangaFavoriteClick(event: Event) {
     event.stopPropagation();
     if (!this.isFavoriteSig()) {
+      this.snackService.openSnackBar('Manga added to favorites!');
       return this.favoritesService.addMangaFavorite(this.mangaData());
     }
+    this.snackService.openSnackBar(
+      'Manga removed from favorites!',
+      'snackbar-danger'
+    );
+
     return this.favoritesService.removeMangaFromFavorites(this.mangaData());
   }
 
