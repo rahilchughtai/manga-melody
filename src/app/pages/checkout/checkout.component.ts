@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { CurrencyPipe, JsonPipe, NgIf } from '@angular/common';
+import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { OrderService } from '../../shared/services/order/order.service';
@@ -26,7 +26,6 @@ interface CheckoutNavigationState {
   selector: 'app-checkout',
   imports: [
     CurrencyPipe,
-    JsonPipe,
     MatButtonModule,
     NgIf,
     CartListComponent,
