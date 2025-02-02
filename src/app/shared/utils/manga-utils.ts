@@ -28,7 +28,6 @@ export const MAX_MANGA_ORDER_QUANTITY = 50;
 
 export function getMangaPrice(manga: MangaItem): number {
   const publishingYear = new Date(manga.published.from).getFullYear();
-  console.log(publishingYear);
   switch (true) {
     case publishingYear <= 1990:
       return 5.0;

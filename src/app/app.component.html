@@ -30,7 +30,7 @@
         <div class="spacer"></div>
         @for (link of navigationLinks(); track link.path) {
           <a [routerLink]="link.path">
-            <mat-icon [matBadge]="link?.badge && link?.badge()">
+            <mat-icon [matBadge]="link.badge && link.badge()">
               {{ link.icon }}
             </mat-icon>
           </a>

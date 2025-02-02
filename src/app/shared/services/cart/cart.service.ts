@@ -31,7 +31,7 @@ export class CartService {
   }
 
   public getCartItemCount() {
-    return this.getShoppingCart().pipe(map(cart => cart.length));
+    return this.getShoppingCart()?.pipe(map(cart => cart.length ?? 0));
   }
 
   private deleteItemFromCart(cart: CartItem[], cartItem: CartItem) {
@@ -69,7 +69,7 @@ export class CartService {
 
   public deleteItemFromShoppingCart(cartItem: CartItem) {
     return this.getShoppingCart()
-      .pipe(take(1))
+      ?.pipe(take(1))
       .subscribe(cart => {
         const newCart = this.deleteItemFromCart(cart, cartItem);
         this.updateShoppingCart(newCart);
@@ -81,7 +81,7 @@ export class CartService {
     overrideQuantity: boolean
   ) {
     return this.getShoppingCart()
-      .pipe(take(1))
+      ?.pipe(take(1))
       .subscribe(cart => {
         const newCart = this.mergeCart(cart, newCartItem, overrideQuantity);
         this.updateShoppingCart(newCart);
@@ -89,7 +89,11 @@ export class CartService {
   }
 
   private updateShoppingCart(newCart: CartItem[]) {
-    updateDoc(this.authService.userDocumentRef, { cart: newCart });
+    const docRef = this.authService.userDocumentRef;
+    if (!docRef) {
+      return;
+    }
+    updateDoc(docRef, { cart: newCart });
   }
 
   public modifyCartItemQuantity(cartItem: CartItem, newQuantity: number) {

@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { AuthService } from '../auth/auth.service';
 import { CartService } from '../cart/cart.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -20,14 +20,17 @@ export class OrderService {
   private cartService = inject(CartService);
 
   get ordersCollectionRef() {
-    return collection(
-      this.firestore,
-      this.authService.userDocumentRef.path,
-      'orders'
-    );
+    const userPath = this.authService.userDocumentRef?.path;
+    if (!userPath) {
+      return null;
+    }
+    return collection(this.firestore, userPath, 'orders');
   }
 
   public makeOrder(checkoutData: CheckOutData) {
+    if (!this.ordersCollectionRef) {
+      return null;
+    }
     const user = this.authService.userDataSnapshot;
     if (!user) {
       console.error('No user data found');
@@ -43,6 +46,9 @@ export class OrderService {
   }
 
   public getUserOrders() {
+    if (!this.ordersCollectionRef) {
+      return of(undefined);
+    }
     return collectionData(this.ordersCollectionRef) as Observable<
       MangaOrder[] | undefined
     >;

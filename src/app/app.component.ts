@@ -17,6 +17,7 @@ import { NavigationLink } from './shared/models';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CartService } from './shared/services/cart/cart.service';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,9 @@ export class AppComponent {
   private readonly screenWidth = signal(window.innerWidth);
   private mobileWidthBreakpoint = 768;
 
-  private cartItemCount = toSignal(inject(CartService).getCartItemCount());
+  private cartItemCount = toSignal(
+    inject(CartService).getCartItemCount() ?? of(undefined)
+  );
 
   @HostListener('window:resize', ['$event'])
   onResize(): void {

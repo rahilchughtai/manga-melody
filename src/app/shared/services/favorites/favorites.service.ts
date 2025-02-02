@@ -32,8 +32,12 @@ export class FavoritesService {
         JSON.stringify(this.mangaFavorites())
       );
       if (untracked(this.isLoggedInSig)) {
+        const userDocumentRef = this.authService.userDocumentRef;
+        if (!userDocumentRef) {
+          return;
+        }
         setDoc(
-          this.authService.userDocumentRef,
+          userDocumentRef,
           { favorites: this.mangaFavorites() },
           { merge: true }
         );

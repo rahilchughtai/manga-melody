@@ -39,14 +39,16 @@ export class AuthService {
   }
 
   public getUserData() {
+    if (!this.userDocumentRef) {
+      return of(undefined);
+    }
     return docData(this.userDocumentRef) as Observable<MangaUser | undefined>;
   }
 
   public get userDocumentRef() {
     const uid = this.userDataSnapshot?.uid;
     if (!uid) {
-      console.error('No user Data Error, handling not implemented');
-      throw Error('No user Data Error, handling not implemented');
+      return null;
     }
     return doc(this.firestore, 'users', uid);
   }
