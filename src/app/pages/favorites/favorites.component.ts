@@ -1,8 +1,8 @@
-import { Component, inject, Signal } from '@angular/core';
-import { FavoritesService } from '../../shared/services/favorites/favorites.service';
-import { CommonModule } from '@angular/common';
 import { MangaListComponent } from '../../components/manga-list/manga-list.component';
 import { MangaFavorite } from '../../shared/models';
+import { FavoritesService } from '../../shared/services';
+import { CommonModule } from '@angular/common';
+import { Component, inject, Signal } from '@angular/core';
 
 @Component({
   selector: 'app-favorites',

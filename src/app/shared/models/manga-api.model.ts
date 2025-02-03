@@ -1,9 +1,9 @@
+import { MangaItem } from './manga-item.model';
 import {
   MangaOrderByAttributeType,
   MangaSortMethod,
   MangaStatusType,
 } from './search.model';
-import { MangaItem } from './manga-item.model';
 export interface Items {
   count: number;
   total: number;

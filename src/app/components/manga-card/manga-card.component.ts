@@ -1,12 +1,13 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { FavoritesService } from '../../shared/services/favorites/favorites.service';
 import { MangaItem } from '../../shared/models';
-import { Router } from '@angular/router';
+import { FavoritesService } from '../../shared/services';
+import { SnackbarService } from '../../shared/services';
 import { CommonModule } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manga-card',
   imports: [
@@ -22,6 +23,7 @@ import { CommonModule } from '@angular/common';
 export class MangaCardComponent {
   private router = inject(Router);
   private favoritesService = inject(FavoritesService);
+  private snackService = inject(SnackbarService);
 
   public fullWidthTitle = input<boolean>(false);
 
@@ -38,8 +40,14 @@ export class MangaCardComponent {
   public btnMangaFavoriteClick(event: Event) {
     event.stopPropagation();
     if (!this.isFavoriteSig()) {
+      this.snackService.openSnackBar('Manga added to favorites!');
       return this.favoritesService.addMangaFavorite(this.mangaData());
     }
+    this.snackService.openSnackBar(
+      'Manga removed from favorites!',
+      'snackbar-danger'
+    );
+
     return this.favoritesService.removeMangaFromFavorites(this.mangaData());
   }
 

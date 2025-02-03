@@ -1,11 +1,11 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { MangaListComponent } from '../../components/manga-list/manga-list.component';
 import { SearchFieldComponent } from '../../components/search-field/search-field.component';
 import { ExtendedSearchFormData, SearchFormData } from '../../shared/models';
-import { MangaListComponent } from '../../components/manga-list/manga-list.component';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { MangaApiService } from '../../shared/services';
-import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { CommonModule } from '@angular/common';
+import { Component, computed, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-search',

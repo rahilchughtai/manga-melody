@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
 import {
   GenreItem,
   JikanApiRequestParam,
   JikanApiResponse,
   ExtendedSearchFormData,
 } from '../../models';
-import { catchError, map, Observable, of } from 'rxjs';
 import { getMangaPrice } from '../../utils/manga-utils';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { catchError, map, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

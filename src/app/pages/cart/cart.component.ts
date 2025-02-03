@@ -1,20 +1,20 @@
-import { Component, computed, inject, Signal } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { CommonModule } from '@angular/common';
-import { CartItem } from '../../shared/models';
-import { MatButtonModule } from '@angular/material/button';
-import { MatListModule } from '@angular/material/list';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatSelectModule } from '@angular/material/select';
-import { CartService } from '../../shared/services/cart/cart.service';
-import { map } from 'rxjs';
-import { Router } from '@angular/router';
 import { CartListComponent } from '../../components/cart-list/cart-list.component';
+import { CartItem } from '../../shared/models';
+import { CartService } from '../../shared/services';
 import { APP_ROUTES } from '../../shared/utils/app-routes';
 import { calculateTotalAmount } from '../../shared/utils/manga-utils';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, Signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-cart',

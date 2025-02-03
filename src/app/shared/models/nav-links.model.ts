@@ -1,5 +1,5 @@
-import { Signal } from '@angular/core';
 import { AppRoute } from '../utils/app-routes';
+import { Signal } from '@angular/core';
 
 export interface NavigationLink {
   path: AppRoute;

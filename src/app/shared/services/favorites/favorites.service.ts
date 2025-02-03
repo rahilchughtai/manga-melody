@@ -1,14 +1,14 @@
+import { MangaFavorite, MangaItem } from '../../models';
+import { AuthService } from '../auth/auth.service';
 import {
   computed,
   effect,
   inject,
   Injectable,
+  untracked,
   Signal,
   signal,
-  untracked,
 } from '@angular/core';
-import { MangaFavorite, MangaItem } from '../../models';
-import { AuthService } from '../auth/auth.service';
 import { Firestore, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
@@ -61,7 +61,6 @@ export class FavoritesService {
       price,
     } = mangaItem;
     if (this.sigMangaFavoriteIds().has(mal_id)) {
-      // TODO Toast message
       return;
     }
 

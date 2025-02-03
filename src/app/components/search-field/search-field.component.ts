@@ -1,10 +1,3 @@
-import { Component } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { outputFromObservable } from '@angular/core/rxjs-interop';
 import {
   ALL_MANGA_STATUS,
   ALL_ORDER_BY_SORT_BY_ATTRIBUTES,
@@ -14,10 +7,17 @@ import {
   MangaStatusType,
   MangaSortMethod,
 } from '../../shared/models';
+import { MangaGenresSorted } from '../../shared/utils/genres';
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { outputFromObservable } from '@angular/core/rxjs-interop';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { pairwise, map, startWith, debounce, timer } from 'rxjs';
-import { MangaGenresSorted } from '../../shared/utils/genres';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-search-field',
