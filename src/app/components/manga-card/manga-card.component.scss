@@ -17,13 +17,14 @@ $cherry: map.get(
 );
 
 $manga-image-width: clamp(100px, 15vw, 220px);
+$manga-title-font-size: clamp(.8rem, 2.5vw, 1.5rem);
 
 mat-card {
   background-color: $bg-color;
   cursor: pointer;
 
   mat-card-title {
-    font-size: 1.3rem;
+    font-size: $manga-title-font-size;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
