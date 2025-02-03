@@ -1,3 +1,5 @@
+import { MangaUser } from '../../models/manga-user.model';
+import { APP_ROUTES } from '../../utils/app-routes';
 import { computed, effect, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { Auth, signOut, User, authState } from '@angular/fire/auth';
@@ -5,8 +7,6 @@ import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { catchError, from, map, Observable, of, take } from 'rxjs';
-import { APP_ROUTES } from '../../utils/app-routes';
-import { MangaUser } from '../../models/manga-user.model';
 @Injectable({
   providedIn: 'root',
 })

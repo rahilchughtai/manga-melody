@@ -1,5 +1,7 @@
-import { inject, Injectable } from '@angular/core';
 import { CheckOutData, MangaOrder } from '../../models';
+import { AuthService } from '../auth/auth.service';
+import { CartService } from '../cart/cart.service';
+import { inject, Injectable } from '@angular/core';
 import {
   addDoc,
   collection,
@@ -7,8 +9,6 @@ import {
   Firestore,
   Timestamp,
 } from '@angular/fire/firestore';
-import { AuthService } from '../auth/auth.service';
-import { CartService } from '../cart/cart.service';
 import { Observable, of } from 'rxjs';
 
 @Injectable({

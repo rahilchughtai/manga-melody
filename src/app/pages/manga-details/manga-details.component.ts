@@ -1,27 +1,27 @@
-import { CommonModule, CurrencyPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
 import { MangaCardComponent } from '../../components/manga-card/manga-card.component';
 import { MangaItem } from '../../shared/models';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatOptionModule } from '@angular/material/core';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '../../shared/services';
 import { CartService } from '../../shared/services';
+import { SnackbarService } from '../../shared/services';
 import {
   createArrayFromInteger,
   minifyMangaData,
 } from '../../shared/utils/manga-utils';
-import { AuthService } from '../../shared/services';
-import { SnackbarService } from '../../shared/services';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormsModule,
+  FormGroup,
+} from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatOptionModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 interface MangaNavigationData {
   mangaData: MangaItem;

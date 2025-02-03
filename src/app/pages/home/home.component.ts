@@ -1,11 +1,11 @@
-import { Component, inject, signal } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MangaApiService } from '../../shared/services';
-import { rxResource } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
 import { MangaListComponent } from '../../components/manga-list/manga-list.component';
-import { RouterLink } from '@angular/router';
+import { MangaApiService } from '../../shared/services';
 import { CommonModule } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',

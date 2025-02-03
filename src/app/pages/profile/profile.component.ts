@@ -1,5 +1,5 @@
-import { Component, computed, inject } from '@angular/core';
 import { AuthService } from '../../shared/services';
+import { Component, computed, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({

@@ -1,3 +1,8 @@
+import { NavigationLink } from './shared/models';
+import { CartService } from './shared/services';
+import { FavoritesService } from './shared/services';
+import { AuthService } from './shared/services';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
@@ -5,20 +10,15 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule, MatNavList } from '@angular/material/list';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
-import { NavigationLink } from './shared/models';
-import { MatBadgeModule } from '@angular/material/badge';
-import { CartService } from './shared/services';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule, MatNavList } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { of } from 'rxjs';
-import { FavoritesService } from './shared/services';
-import { AuthService } from './shared/services';
 
 @Component({
   selector: 'app-root',

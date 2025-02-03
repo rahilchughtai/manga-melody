@@ -1,10 +1,10 @@
+import { CartItem } from '../../models/cart.model';
+import { MAX_MANGA_ORDER_QUANTITY } from '../../utils/manga-utils';
+import { AuthService } from '../auth/auth.service';
+import { SnackbarService } from '../snackbar/snackbar.service';
 import { inject, Injectable } from '@angular/core';
 import { updateDoc } from '@angular/fire/firestore';
-import { AuthService } from '../auth/auth.service';
-import { CartItem } from '../../models/cart.model';
 import { map, take } from 'rxjs';
-import { MAX_MANGA_ORDER_QUANTITY } from '../../utils/manga-utils';
-import { SnackbarService } from '../snackbar/snackbar.service';
 
 @Injectable({
   providedIn: 'root',

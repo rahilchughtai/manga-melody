@@ -1,6 +1,5 @@
-import { TestBed } from '@angular/core/testing';
-
 import { MangaApiService } from './manga-api.service';
+import { TestBed } from '@angular/core/testing';
 
 describe('MangaApiService', () => {
   let service: MangaApiService;

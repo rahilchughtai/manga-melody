@@ -1,6 +1,6 @@
-import { Component, input } from '@angular/core';
 import { MangaItem } from '../../shared/models';
 import { MangaCardComponent } from '../manga-card/manga-card.component';
+import { Component, input } from '@angular/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 @Component({
   selector: 'app-manga-list',

@@ -1,24 +1,24 @@
-import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { CartItem, CheckOutData } from '../../shared/models';
 import { CartListComponent } from '../../components/cart-list/cart-list.component';
-import { MatTabsModule } from '@angular/material/tabs';
+import { NextTabButtonComponent } from '../../components/payment/next-tab-button/next-tab-button.component';
+import { CartItem, CheckOutData } from '../../shared/models';
+import { OrderService } from '../../shared/services';
+import { SnackbarService } from '../../shared/services';
+import { APP_ROUTES } from '../../shared/utils/app-routes';
+import { calculateTotalAmount } from '../../shared/utils/manga-utils';
+import { CurrencyPipe, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import {
+  ReactiveFormsModule,
   FormControl,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { CurrencyPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { OrderService } from '../../shared/services';
-import { APP_ROUTES } from '../../shared/utils/app-routes';
-import { calculateTotalAmount } from '../../shared/utils/manga-utils';
-import { NextTabButtonComponent } from '../../components/payment/next-tab-button/next-tab-button.component';
-import { SnackbarService } from '../../shared/services';
+import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
+import { Router } from '@angular/router';
 import { ValidatorService } from 'angular-iban';
 
 interface CheckoutNavigationState {

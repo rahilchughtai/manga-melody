@@ -1,19 +1,19 @@
-import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { SearchComponent } from './pages/search/search.component';
+import { CartComponent } from './pages/cart/cart.component';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 import { FavoritesComponent } from './pages/favorites/favorites.component';
-import { MangaDetailsComponent } from './pages/manga-details/manga-details.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginRegisterComponent } from './pages/login-register/login-register.component';
+import { MangaDetailsComponent } from './pages/manga-details/manga-details.component';
+import { OrdersComponent } from './pages/orders/orders.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { SearchComponent } from './pages/search/search.component';
+import { APP_ROUTES } from './shared/utils/app-routes';
 import {
   canActivate,
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
-import { APP_ROUTES } from './shared/utils/app-routes';
-import { CartComponent } from './pages/cart/cart.component';
-import { CheckoutComponent } from './pages/checkout/checkout.component';
-import { OrdersComponent } from './pages/orders/orders.component';
+import { Routes } from '@angular/router';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToProfile = () => redirectLoggedInTo(['profile']);

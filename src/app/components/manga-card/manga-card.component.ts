@@ -1,13 +1,13 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { MatCardModule } from '@angular/material/card';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatIconModule } from '@angular/material/icon';
-import { FavoritesService } from '../../shared/services';
 import { MangaItem } from '../../shared/models';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { FavoritesService } from '../../shared/services';
 import { SnackbarService } from '../../shared/services';
+import { CommonModule } from '@angular/common';
+import { Component, computed, inject, input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-manga-card',
   imports: [

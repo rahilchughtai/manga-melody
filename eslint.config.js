@@ -5,12 +5,14 @@ const angular = require('angular-eslint');
 const eslintPluginPrettier = require('eslint-plugin-prettier');
 const eslintPluginPrettierRecommended = require('eslint-plugin-prettier/recommended');
 const unusedImports = require('eslint-plugin-unused-imports');
+const eslintPluginImport = require('eslint-plugin-import');
 
 module.exports = tseslint.config(
   {
     files: ['**/*.ts'],
     plugins: {
       'unused-imports': unusedImports,
+      import: eslintPluginImport,
     },
     extends: [
       eslint.configs.recommended,
@@ -58,6 +60,17 @@ module.exports = tseslint.config(
           destructuredArrayIgnorePattern: '^_',
           varsIgnorePattern: '^_',
           ignoreRestSiblings: true,
+        },
+      ],
+      'import/order': [
+        'error',
+        {
+          groups: [],
+          'newlines-between': 'never',
+          alphabetize: {
+            order: 'asc', // Sort in ascending order. Options: ['asc', 'desc']
+            caseInsensitive: true, // Ignore case when sorting
+          },
         },
       ],
     },
