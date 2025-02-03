@@ -1,3 +1,5 @@
+@use './shared/styles' as *;
+
 .sidenav-container {
   height: 100%;
   .spacer {
@@ -5,6 +7,12 @@
   }
 
   mat-toolbar {
+    .brand-link a{
+      @include gradient-text;
+      font-weight: bold;
+      letter-spacing: .1em;
+
+    }
     a {
       margin-left: 1em;
       text-decoration: none;

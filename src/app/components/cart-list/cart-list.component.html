@@ -1,5 +1,8 @@
 <div class="cart-list">
   @if (cartItems().length) {
+    <h1>
+      Your cart items
+    </h1>
     <ul>
       @for (item of cartItems(); track $index) {
         <li>

@@ -1,4 +1,6 @@
-$grey: #303030;
+@use '../../shared/styles' as *;
+
+$accent: $azure-blue;
 
 .cart-list {
   padding: 0 2em;
@@ -7,30 +9,31 @@ $grey: #303030;
     padding: 0;
     max-width: 800px;
     li {
+      @include border-gradient;
       list-style: none;
       flex-wrap: wrap;
-      padding: 0em 2em;
+      padding: 1.5em 2em;
       margin: 1em 0;
-      border: 2px white solid;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 2em;
       text-align: center;
+
       .item-info {
-
-        margin: 1em 0em;
-        padding: 1em 2em;
-        background-color: $grey;
-
-        p{
-          font-size: 1.3em
+        padding: 0.5em 1.5em;
+        border-radius: 1.5em;
+        background-color: $accent;
+        p {
+          font-size: 1.3em;
+          font-weight: bold;
         }
-        img{
-          width: 200px;
+        img {
+          width: clamp(90px, 10vw, 200px);
         }
       }
       .amount-info {
+        font-weight: bold;
         mat-form-field {
           width: 110px;
         }
@@ -42,95 +45,9 @@ $grey: #303030;
   }
 }
 
-.grey-text{
-  background-color: $grey;
+.grey-text {
+  background-color: $accent;
   border-radius: 2em;
-  padding: 1em 0;
+  padding: 1em 0.8em;
   font-size: 1.1em;
 }
-
-// li {
-
-//   p {
-//     font-size: 1.6em;
-//     margin-top: 0.8em;
-//   }
-//   button {
-//     padding: 0.2em;
-//     margin: 0 1em;
-
-//     &:hover {
-//       // background-color: $primary_marking_color;
-//     }
-//   }
-
-//   div.left {
-//     &:hover {
-//       // background-color: $primary_marking_color_dark;
-//     }
-
-//     cursor: pointer;
-//     //   background-color: $main_color_dark;
-//     margin: 0 2.5%;
-//     padding-top: 20px;
-//     border-radius: 10px;
-//     width: 250px;
-//     p {
-//       width: fit-content;
-//       max-width: 200px;
-//       margin: 0 auto 20px auto;
-
-//       height: 25px;
-
-//       margin: 0 auto 10px auto;
-
-//       white-space: nowrap;
-//       overflow: hidden;
-//       text-overflow: ellipsis;
-//     }
-
-//     img {
-//       display: block;
-//       margin: 0 auto 20px auto;
-//       height: auto;
-//     }
-//   }
-
-//   div.right {
-//     margin: 0 2.5%;
-//     width: 350px;
-
-//     //   @media (max-width: $mobile_width) {
-//     //     margin-top: 30px;
-//     //     margin-bottom: -10px;
-//     //   }
-
-//     p {
-//       width: fit-content;
-//       max-width: 350px;
-//       margin: 0 auto 40px auto;
-//       height: 25px;
-//       padding: 5px 15px;
-//       border-radius: 10px;
-//       // background-color: $main_color_dark;
-//       overflow: hidden;
-//     }
-
-//     button.deleteElement {
-//       margin: 0 auto 40px auto;
-//       display: block;
-//     }
-
-//     div.changeQuantity {
-//       width: 100%;
-
-//       button {
-//         height: 52px;
-
-//         &:disabled {
-//           // background-color: $main_color;
-//         }
-//       }
-//     }
-//   }
-// }
