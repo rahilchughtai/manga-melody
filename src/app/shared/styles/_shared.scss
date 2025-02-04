@@ -1,0 +1,16 @@
+@use '@angular/material' as mat;
+@use 'sass:map';
+
+$azure-palette: mat.$azure-palette;
+$red-palette: mat.$red-palette;
+
+@function mat-color($palette, $key) {
+  @return map.get($palette, $key);
+}
+
+$azure-blue: mat-color($azure-palette, 10);
+$azure-dark: mat-color($azure-palette, 0);
+$cherry: mat-color($red-palette, 30);
+$manga-image-width: clamp(100px, 15vw, 220px);
+$manga-card-color: $azure-dark;
+$manga-title-font-size: clamp(0.8rem, 2.5vw, 1.5rem);

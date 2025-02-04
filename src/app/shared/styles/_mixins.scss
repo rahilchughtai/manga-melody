@@ -1,11 +1,11 @@
 $gradient-color-1: #c1c1ff 0%;
 $gradient-color-2: #e91e63 100%;
 
-$gradient-linear: linear-gradient(
-  to right,
-  $gradient-color-1,
-  $gradient-color-2
-);
+@function make-gradient-linear($color1, $color2) {
+  @return linear-gradient(to right, $color1, $color2);
+}
+
+$gradient-linear: make-gradient-linear($gradient-color-1, $gradient-color-2);
 
 @mixin page-wrap {
   display: flex;
@@ -30,9 +30,14 @@ $gradient-linear: linear-gradient(
   background: linear-gradient(to right, $gradient-color-1, $gradient-color-2);
 }
 
-@mixin gradient-font {
+@mixin gradient-text {
   background: #0000ff;
   @include primary-gradient();
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+@mixin border-gradient($width: 2px) {
+  border: $width solid;
+  border-image: $gradient-linear 1;
 }
