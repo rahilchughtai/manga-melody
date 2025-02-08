@@ -42,11 +42,12 @@ $icon-size: 50px;
 }
 
 .manga-showcase {
+  margin-top: 4em;
   text-align: center;
 }
 
 .benefits-showcase {
-  margin-top: 2em;
+  margin-top: 4em;
   text-align: center;
 
   .benefits-wrapper {
@@ -79,9 +80,5 @@ $icon-size: 50px;
         font-size: 1.2rem;
       }
     }
-    /*     justify-content: space-around;
-    flex-direction: row;
-
-    gap: 1rem; */
   }
 }

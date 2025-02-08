@@ -47,7 +47,7 @@ $gradient-linear: make-gradient-linear($gradient-color-1, $gradient-color-2);
 @mixin button-large {
   @include mat.button-overrides(
     (
-      filled-label-text-size: 2rem,
+      filled-label-text-size: 1.3rem,
       filled-horizontal-padding: .8em,
     )
   );

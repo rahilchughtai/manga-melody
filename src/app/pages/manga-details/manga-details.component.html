@@ -9,17 +9,42 @@
     <div class="content">
       <div class="score">
         <h2>Ratings</h2>
-        <p>Score: {{ navState.mangaData.score }} / 10</p>
-        <p>Popularity {{ navState.mangaData.popularity }}</p>
-        <p>Members {{ navState.mangaData.members }}</p>
+        <div class="score-metrics">
+          <div class="rating">
+            <p>Score: {{ navState.mangaData.score }} / 10</p>
+            <mat-icon>star</mat-icon>
+          </div>
+
+          <div class="rating">
+            <p>Popularity: #{{ navState.mangaData.popularity }}</p>
+            <mat-icon>emoji_events</mat-icon>
+          </div>
+
+          <div class="rating">
+            <p>Members: {{ navState.mangaData.members }}</p>
+            <mat-icon>people</mat-icon>
+          </div>
+        </div>
       </div>
+      <h2>Genres</h2>
+
+      <div class="genres">
+        <mat-chip-set aria-label="Fish selection">
+          @for (genre of navState.mangaData.genres; track genre.mal_id) {
+            <mat-chip>{{ genre.name }}</mat-chip>
+          }
+        </mat-chip-set>
+      </div>
+
       <h2>Synopsis</h2>
       <div class="synopsis">
         <p>
           {{ navState.mangaData.synopsis }}
         </p>
       </div>
-      <h2>Price per Manga: {{ navState.mangaData.price | currency: 'EUR' }} EUR</h2>
+      <h2>
+        Price per Manga: {{ navState.mangaData.price | currency: 'EUR' }} EUR
+      </h2>
     </div>
   </div>
   <section class="payment">

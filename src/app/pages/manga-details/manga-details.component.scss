@@ -1,6 +1,6 @@
 @use "@angular/material" as mat;
 @use "sass:map";
-
+$icon-size: 25px;
 $info-width: 400px;
 $info-height: 300px;
 
@@ -28,6 +28,26 @@ $cherry: map.get(
     gap: 1.2em;
     .content {
       max-width: $info-width;
+      .score{
+        .rating{
+          display: flex;
+          align-items: center;
+
+          p{
+            font-size: 1.2em;
+            margin-right: .3em;
+          } 
+
+          mat-icon{
+            font-size: $icon-size;
+            height: $icon-size;
+            width: $icon-size;
+
+          }
+
+        }
+         
+      }
     }
 
     .synopsis {
@@ -53,6 +73,7 @@ $cherry: map.get(
     .payment-form {
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 1em;
     }
 
