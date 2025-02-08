@@ -1,10 +1,64 @@
 <div class="page">
-  <mat-tab-group>
-    <mat-tab label="Login"> Login </mat-tab>
-    <mat-tab label="Register"> Register</mat-tab>
+  <mat-tab-group dynamicHeight mat-stretch-tabs class="login-register">
+    <mat-tab label="Login">
+      <h2>Login with E-Mail</h2>
+      <form [formGroup]="loginForm">
+        <mat-form-field appearance="outline">
+          <mat-label>E-Mail</mat-label>
+          <input formControlName="email" matInput />
+        </mat-form-field>
+        <app-password-field
+          [inputFormGroupName]="loginForm"
+          inputFormControlName="password" />
+
+        <button
+          [disabled]="loginForm.invalid"
+          (click)="login()"
+          mat-raised-button
+          color="primary"
+          type="submit">
+          Login
+        </button>
+        @if (loginErrorSig()) {
+          <mat-error>
+            {{ loginErrorSig() }}
+          </mat-error>
+        }
+      </form>
+    </mat-tab>
+    <mat-tab label="Register">
+      <h2>Register</h2>
+
+      <form [formGroup]="registerForm">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>E-Mail</mat-label>
+          <input formControlName="email" matInput />
+        </mat-form-field>
+        <app-password-field
+          [inputFormGroupName]="registerForm"
+          inputFormControlName="password" />
+
+        <app-password-field
+          [inputFormGroupName]="registerForm"
+          inputFormControlName="confirmPassword" />
+        <button
+          [disabled]="registerForm.invalid"
+          (click)="register()"
+          mat-raised-button>
+          Register
+        </button>
+        @if (registerErrorSig()) {
+          <mat-error> {{ registerErrorSig() }} </mat-error>
+        }
+      </form>
+    </mat-tab>
   </mat-tab-group>
   <div class="google">
-    <p>Or</p>
+    <h3>Or alternatively</h3>
     <button (click)="authService.signInWithGoogle()" mat-flat-button>
       Login with Google
     </button>
