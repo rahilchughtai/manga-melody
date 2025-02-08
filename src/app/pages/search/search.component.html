@@ -1,11 +1,12 @@
 <div class="search">
   <h1>Discover your favorite Mangas</h1>
   <div class="content">
-    <app-search-field (search)="handleSearchChange($event)" />
+    <div class="search-field">
+      <app-search-field (search)="handleSearchChange($event)" />
+    </div>
     <app-manga-list
       [isLoading]="mangaDataResponse.isLoading()"
-      [mangaList]="mangaListSig()"
-    />
+      [mangaList]="mangaListSig()" />
     <div class="paginator" [hidden]="mangaDataResponse.isLoading()">
       <mat-paginator
         showFirstLastButtons="true"
@@ -13,8 +14,7 @@
         [pageSize]="pageSizeSig()"
         [pageSizeOptions]="[12, 24]"
         (page)="pageEvent($event)"
-        aria-label="Select page"
-      >
+        aria-label="Select page">
       </mat-paginator>
     </div>
   </div>
