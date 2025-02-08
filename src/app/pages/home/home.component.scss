@@ -1,6 +1,9 @@
+@use '../../shared/styles' as s;
+
 $hero-bg-image: url('../../../../public/home_wallpaper.jpg');
 $text-shadow: 0 2px 4px rgba(0, 0, 0, 0.7);
 $dim-opacity: 0.6;
+$icon-size: 50px;
 
 .hero {
   height: 50vh;
@@ -11,13 +14,18 @@ $dim-opacity: 0.6;
   $dim-color-start: rgba(0, 0, 10, $dim-opacity);
   $dim-color-end: rgba(0, 0, 20, $dim-opacity);
 
-  background: linear-gradient($dim-color-start, $dim-color-end), $hero-bg-image no-repeat center / cover;
-
+  background:
+    linear-gradient($dim-color-start, $dim-color-end),
+    $hero-bg-image no-repeat center / cover;
 
   .content {
     text-align: center;
     color: white;
     text-shadow: $text-shadow;
+
+    button {
+      @include s.button-large;
+    }
 
     p {
       font-size: clamp(1rem, 3vw, 1.5rem);
@@ -28,18 +36,49 @@ $dim-opacity: 0.6;
 
       span {
         color: rgb(172, 164, 222);
-
       }
     }
   }
 }
 
-
-.showcase {
+.manga-showcase {
+  margin-top: 4em;
   text-align: center;
 }
 
-
-.benefits {
+.benefits-showcase {
+  margin-top: 4em;
   text-align: center;
+
+  .benefits-wrapper {
+    margin-top: 2em;
+    margin-bottom: 4em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    .benefit {
+      margin: 0 1em;
+      mat-icon {
+        font-size: $icon-size;
+        height: $icon-size;
+        width: $icon-size;
+      }
+      color: black;
+      width: 280px;
+      padding: 1em;
+      border-radius: 10px;
+      background: s.$gradient-linear;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5em;
+      }
+
+      p {
+        font-size: 1.2rem;
+      }
+    }
+  }
 }

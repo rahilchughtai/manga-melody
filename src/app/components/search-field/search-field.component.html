@@ -15,10 +15,6 @@
   <mat-form-field appearance="fill">
     <mat-label>Genres</mat-label>
     <mat-select formControlName="genre" multiple>
-      <!-- <mat-select-trigger>
-            <form-genre-display [mangaGenre]="mangaGenre">
-            </form-genre-display>
-          </mat-select-trigger> -->
       <mat-option *ngFor="let genre of allMangaGenres" [value]="genre">{{
         genre.name
       }}</mat-option>

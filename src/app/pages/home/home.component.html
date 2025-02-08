@@ -5,26 +5,41 @@
       <span> MangaMelody </span>
     </h1>
     <p>Your place to discover Manga</p>
-    <button routerLink="/search" class="btn-large" mat-flat-button>
-      Discover Manga
-    </button>
+    <button routerLink="/search" mat-flat-button>Discover</button>
   </div>
 </section>
 
-<section class="showcase">
+<section class="manga-showcase">
   <div class="content">
     <h2>Our Top Picks for you</h2>
     <app-manga-list
       [isLoading]="mangaData.isLoading()"
-      [mangaList]="mangaData.value() ?? []"
-    />
+      [mangaList]="mangaData.value() ?? []" />
   </div>
 </section>
 
-<div class="benefits">
+<section class="benefits-showcase">
   <h2>Our Benefits</h2>
-
-  <h3 style="margin: 4em 4em;">
-    (To be added...)
-  </h3>
-</div>
+  <div class="benefits-wrapper">
+    <div class="benefit">
+      <mat-icon>saved_search</mat-icon>
+      <h2>Everything in one place</h2>
+      <p>
+        Find all your favorite Manga in one place. No need to search through
+        multiple websites.
+      </p>
+    </div>
+    <div class="benefit">
+      <mat-icon>payment</mat-icon>
+      <h2>Secure payment</h2>
+      <p>We use secure payment methods to ensure your data is safe.</p>
+    </div>
+    <div class="benefit">
+      <mat-icon>local_shipping</mat-icon>
+      <h2>Fast delivery</h2>
+      <p>
+        We deliver your Manga as fast as possible. No need to wait for weeks.
+      </p>
+    </div>
+  </div>
+</section>

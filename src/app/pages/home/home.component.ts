@@ -4,12 +4,19 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 
 @Component({
   selector: 'app-home',
-  imports: [MatButtonModule, CommonModule, MangaListComponent, RouterLink],
+  imports: [
+    MatButtonModule,
+    MatIconModule,
+    CommonModule,
+    MangaListComponent,
+    RouterLink,
+  ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })

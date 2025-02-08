@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 $gradient-color-1: #c1c1ff 0%;
 $gradient-color-2: #e91e63 100%;
 
@@ -40,4 +42,13 @@ $gradient-linear: make-gradient-linear($gradient-color-1, $gradient-color-2);
 @mixin border-gradient($width: 2px) {
   border: $width solid;
   border-image: $gradient-linear 1;
+}
+
+@mixin button-large {
+  @include mat.button-overrides(
+    (
+      filled-label-text-size: 1.3rem,
+      filled-horizontal-padding: .8em,
+    )
+  );
 }

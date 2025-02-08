@@ -16,6 +16,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatOptionModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,6 +42,7 @@ interface MangaNavigationData {
     MatSelectModule,
     MatIconModule,
     ReactiveFormsModule,
+    MatChipsModule,
   ],
   templateUrl: './manga-details.component.html',
   styleUrl: './manga-details.component.scss',
