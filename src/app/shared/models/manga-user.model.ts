@@ -22,3 +22,8 @@ export interface UserAddress {
   postalCode: number | null;
   country?: string;
 }
+
+export interface CustomAuthError {
+  code: string;
+  message: string;
+}

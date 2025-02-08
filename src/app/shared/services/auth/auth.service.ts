@@ -1,8 +1,15 @@
-import { MangaUser } from '../../models/manga-user.model';
+import { CustomAuthError, MangaUser } from '../../models/manga-user.model';
 import { APP_ROUTES } from '../../utils/app-routes';
 import { computed, effect, inject, Injectable } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Auth, signOut, User, authState } from '@angular/fire/auth';
+import {
+  Auth,
+  signOut,
+  User,
+  authState,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from '@angular/fire/auth';
 import { GoogleAuthProvider, signInWithPopup } from '@angular/fire/auth';
 import { doc, docData, Firestore, setDoc } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
@@ -57,12 +64,36 @@ export class AuthService {
     return computed(() => this.userStateSig() !== null);
   }
 
+  public registerWithEmailAndPassword(email: string, password: string) {
+    return createUserWithEmailAndPassword(this.auth, email, password)
+      .then(userCredential => userCredential.user.uid)
+      .catch(error => {
+        const customError: CustomAuthError = {
+          code: error.code ?? 'Unknown Error Code',
+          message: error.message ?? 'Unknown Error Occurred',
+        };
+        return customError;
+      });
+  }
+
+  public logInWithEmailAndPassword(email: string, password: string) {
+    return signInWithEmailAndPassword(this.auth, email, password)
+      .then(userCredential => userCredential.user.uid)
+      .catch(error => {
+        const customError: CustomAuthError = {
+          code: error.code ?? 'Unknown Error Code',
+          message: error.message ?? 'Unknown Error Occurred',
+        };
+        return customError;
+      });
+  }
+
   public signInWithGoogle() {
     return from(signInWithPopup(this.auth, new GoogleAuthProvider()))
       .pipe(
         take(1),
         catchError(error => {
-          console.error(error);
+          console.log(error);
           return of(null);
         }),
         map(userCredential => userCredential?.user ?? null)
