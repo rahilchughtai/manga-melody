@@ -1,5 +1,23 @@
 # MangaMelody
 
+Projektabgabe für Kurs: Software Engineering.
+
+|                |                                  |
+|----------------|----------------------------------|
+| **Projekt-Titel:** | Manga-Melody                   |
+| **Name:**         | Rahil Chughtai                 |
+| **Matrikelnummer:** | IU14099395                   |
+| **Abschluss:**    | Informatik, M. Sc.             |
+| **E-Mail:**       | rahil.chughtai@iu-study.org    |
+| **GitHub-Link:**  | [https://github.com/rahilchughtai/manga-melody](https://github.com/rahilchughtai/manga-melody) |
+| **Website Domain**   |  [https://manga-melody.web.app/](https://manga-melody.web.app/)                 |
+| **Kursnummer:**   | DLMCSPSE01_D                  |
+| **Dozent:**       | Prof. Dr. Markus Kleffmann    |
+
+
+
+## Automatisch generierte Dokumentation
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.4.
 
 ## Development server
@@ -42,14 +60,6 @@ To execute unit tests with the [Karma](https://karma-runner.github.io) test runn
 
 ```bash
 ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
 ```
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
