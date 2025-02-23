@@ -21,10 +21,11 @@ export class AuthService {
   private router = inject(Router);
   private auth = inject(Auth);
   private firestore = inject(Firestore);
-  public userStateSig = toSignal(authState(this.auth));
+  private userStateSig = toSignal(authState(this.auth));
 
   public signOut() {
     signOut(this.auth).then(() => {
+      localStorage.removeItem('user');
       this.router.navigate([APP_ROUTES.LOGIN]);
     });
   }
@@ -33,10 +34,11 @@ export class AuthService {
     effect(() => {
       const user = this.userStateSig();
       if (user) {
+        this.setUserData(user);
         localStorage.setItem('user', JSON.stringify(user));
+        this.router.navigate([APP_ROUTES.PROFILE]);
         return;
       }
-      localStorage.removeItem('user');
     });
   }
 
@@ -64,9 +66,16 @@ export class AuthService {
     return computed(() => this.userStateSig() !== null);
   }
 
-  public registerWithEmailAndPassword(email: string, password: string) {
+  public registerWithEmailAndPassword(
+    email: string,
+    password: string,
+    username: string
+  ) {
     return createUserWithEmailAndPassword(this.auth, email, password)
-      .then(userCredential => userCredential.user.uid)
+      .then(userCredential => {
+        this.setUserData({ ...userCredential.user, displayName: username });
+        return userCredential.user.uid;
+      })
       .catch(error => {
         const customError: CustomAuthError = {
           code: error.code ?? 'Unknown Error Code',
@@ -89,19 +98,14 @@ export class AuthService {
   }
 
   public signInWithGoogle() {
-    return from(signInWithPopup(this.auth, new GoogleAuthProvider()))
-      .pipe(
-        take(1),
-        catchError(error => {
-          console.log(error);
-          return of(null);
-        }),
-        map(userCredential => userCredential?.user ?? null)
-      )
-      .subscribe(user => {
-        this.setUserData(user);
-        this.router.navigate([APP_ROUTES.PROFILE]);
-      });
+    return from(signInWithPopup(this.auth, new GoogleAuthProvider())).pipe(
+      take(1),
+      catchError(error => {
+        console.log(error);
+        return of(null);
+      }),
+      map(userCredential => userCredential?.user ?? null)
+    );
   }
 
   async setUserData(user: User | null) {
@@ -111,10 +115,10 @@ export class AuthService {
     const userData = {
       uid: user.uid,
       email: user.email,
-      displayName: user.displayName,
       photoURL: user.photoURL,
+      ...(user.displayName && { displayName: user.displayName }),
     };
     const docRef = doc(this.firestore, 'users', user.uid);
-    await setDoc(docRef, userData);
+    await setDoc(docRef, userData, { merge: true });
   }
 }

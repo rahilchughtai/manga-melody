@@ -1,5 +1,6 @@
 import { AuthService } from '../../shared/services';
 import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -10,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export class ProfileComponent {
   public authService = inject(AuthService);
-  public userData = this.authService.userStateSig;
+  public userData = toSignal(this.authService.getUserData());
   public imageError = false;
   public fallbackImage = 'assets/user.jpg';
   public imageUIrl = computed(

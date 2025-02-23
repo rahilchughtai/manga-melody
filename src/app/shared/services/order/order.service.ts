@@ -2,11 +2,13 @@ import { CheckOutData, MangaOrder } from '../../models';
 import { AuthService } from '../auth/auth.service';
 import { CartService } from '../cart/cart.service';
 import { inject, Injectable } from '@angular/core';
+import { query } from '@angular/fire/firestore';
 import {
   addDoc,
   collection,
   collectionData,
   Firestore,
+  orderBy,
   Timestamp,
 } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
@@ -49,8 +51,10 @@ export class OrderService {
     if (!this.ordersCollectionRef) {
       return of(undefined);
     }
-    return collectionData(this.ordersCollectionRef) as Observable<
-      MangaOrder[] | undefined
-    >;
+
+    return collectionData(
+      query(this.ordersCollectionRef, orderBy('orderDate', 'desc')),
+      { idField: 'orderId' }
+    ) as Observable<MangaOrder[] | undefined>;
   }
 }
