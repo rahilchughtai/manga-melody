@@ -11,6 +11,9 @@ import { toSignal } from '@angular/core/rxjs-interop';
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent {
+  /** OrderService for handling order business logic */
   private orderService = inject(OrderService);
+
+  /** Signal that holds the user's orders */
   public ordersSig = toSignal(this.orderService.getUserOrders());
 }

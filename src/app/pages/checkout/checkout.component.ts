@@ -43,14 +43,23 @@ interface CheckoutNavigationState {
   styleUrl: './checkout.component.scss',
 })
 export class CheckoutComponent {
+  /** OrderService for handling order business logic */
   private orderService = inject(OrderService);
+
+  /** Router for navigation */
   private router = inject(Router);
+
+  /** Cart data state from the navigation extras */
   public cartDataState = this.router.getCurrentNavigation()?.extras
     .state as CheckoutNavigationState;
 
+  /** Total amount of the cart items */
   public totalAmount = calculateTotalAmount(this.cartDataState.cartItems);
+
+  /** SnackbarService for displaying snackbar messages */
   private snackService = inject(SnackbarService);
 
+  /** Form group for IBAN input */
   public ibanForm = new FormGroup({
     iban: new FormControl('', {
       validators: [Validators.required, ValidatorService.validateIban],
@@ -58,6 +67,7 @@ export class CheckoutComponent {
     }),
   });
 
+  /** Form group for shipping address input */
   public shippingForm = new FormGroup({
     name: new FormControl('', {
       validators: Validators.required,
@@ -77,12 +87,15 @@ export class CheckoutComponent {
     }),
   });
 
+  /** Index of the current step in the checkout process */
   public stepIndex = 0;
 
-  incrementStepIndex() {
+  /** Increments the step index */
+  public incrementStepIndex() {
     this.stepIndex += 1;
   }
 
+  /** Function for making an order */
   public makeOrder() {
     const orderData: CheckOutData = {
       orderItems: this.cartDataState.cartItems,

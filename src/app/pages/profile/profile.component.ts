@@ -9,10 +9,19 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
+  /** AuthService to handle user authentication */
   public authService = inject(AuthService);
+
+  /** User data from the AuthService */
   public userData = this.authService.userStateSig;
+
+  /** Error flag for image loading */
   public imageError = false;
+
+  /** Fallback image for user profile */
   public fallbackImage = 'assets/user.jpg';
+
+  /** Computed property for the user's profile image URL */
   public imageUIrl = computed(
     () => this.userData()?.photoURL ?? this.fallbackImage
   );

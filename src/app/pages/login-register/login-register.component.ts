@@ -32,11 +32,16 @@ import { MatTabsModule } from '@angular/material/tabs';
   styleUrl: './login-register.component.scss',
 })
 export class LoginRegisterComponent {
+  /** AuthService to handle user authentication */
   public authService = inject(AuthService);
 
+  /** Register Error Signal, has value when the register form has error */
   public registerErrorSig = signal<string | null>(null);
+
+  /** Login Error Signal, has value when the login form has error */
   public loginErrorSig = signal<string | null>(null);
 
+  /** Login Form Group */
   public loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -45,6 +50,7 @@ export class LoginRegisterComponent {
     ]),
   });
 
+  /** Register Form Group */
   public registerForm = new FormGroup({
     username: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -58,8 +64,10 @@ export class LoginRegisterComponent {
     ]),
   });
 
+  /** Signal that indicates whether the user is logged in */
   public isLoggedInSig = this.authService.isLoggedInSig();
 
+  /** Function for logging in */
   public async login() {
     const { email, password } = this.loginForm.value;
     if (!email || !password) {
@@ -76,6 +84,7 @@ export class LoginRegisterComponent {
     this.loginErrorSig.set(null);
   }
 
+  /** Function for registering a new user */
   public async register() {
     const { email, password, confirmPassword } = this.registerForm.value;
     if (!email || !password || password !== confirmPassword) {
