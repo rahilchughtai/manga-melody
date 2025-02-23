@@ -106,3 +106,7 @@ export type MangaType =
   | 'Doujin'
   | 'Manhwa'
   | 'Manhua';
+
+export interface MangaNavigationData {
+  mangaData: MangaItem;
+}

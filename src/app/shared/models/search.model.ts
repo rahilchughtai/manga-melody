@@ -26,6 +26,8 @@ export const ALL_MANGA_STATUS = [
 export interface GenreItem {
   mal_id: number;
   name: string;
+  type?: string;
+  url?: string;
 }
 
 export type MangaStatusType = (typeof ALL_MANGA_STATUS)[number];

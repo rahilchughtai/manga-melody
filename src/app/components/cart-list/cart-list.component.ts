@@ -32,7 +32,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 })
 export class CartListComponent {
   private cartService = inject(CartService);
-  public changable = input.required<boolean>();
+  public changeable = input.required<boolean>();
   public cartItems = input.required<CartItem[]>();
   public maxQuantity = MAX_MANGA_ORDER_QUANTITY;
   public mangaQuantityOptions = createArrayFromInteger(this.maxQuantity);

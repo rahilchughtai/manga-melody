@@ -1,5 +1,5 @@
 import { MangaCardComponent } from '../../components/manga-card/manga-card.component';
-import { MangaItem } from '../../shared/models';
+import { MangaNavigationData } from '../../shared/models';
 import { AuthService } from '../../shared/services';
 import { CartService } from '../../shared/services';
 import { SnackbarService } from '../../shared/services';
@@ -24,10 +24,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
-
-interface MangaNavigationData {
-  mangaData: MangaItem;
-}
 
 @Component({
   selector: 'app-manga-details',

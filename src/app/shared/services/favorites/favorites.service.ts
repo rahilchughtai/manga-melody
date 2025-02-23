@@ -9,7 +9,7 @@ import {
   Signal,
   signal,
 } from '@angular/core';
-import { Firestore, setDoc } from '@angular/fire/firestore';
+import { setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +17,6 @@ import { Firestore, setDoc } from '@angular/fire/firestore';
 export class FavoritesService {
   private authService = inject(AuthService);
   private isLoggedInSig = this.authService.isLoggedInSig();
-  private firestore = inject(Firestore);
   private STORAGE_ID = 'favorites';
   private sigMangaFavorites = signal(this.getInitialStorageFavorites());
   public sigMangaFavoriteIds = computed(

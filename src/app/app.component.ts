@@ -38,9 +38,7 @@ import { of } from 'rxjs';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  isLoggedInSig = inject(AuthService).isLoggedInSig();
-  title = 'manga-melody';
-
+  private isLoggedInSig = inject(AuthService).isLoggedInSig();
   private readonly screenWidth = signal(window.innerWidth);
   private mobileWidthBreakpoint = 768;
 

@@ -1,5 +1,7 @@
 import { OrdersComponent } from './orders.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Auth } from '@angular/fire/auth';
+import { Firestore } from '@angular/fire/firestore';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -8,6 +10,10 @@ describe('OrdersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [OrdersComponent],
+      providers: [
+        { provide: Firestore, useValue: {} },
+        { provide: Auth, useValue: {} },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(OrdersComponent);

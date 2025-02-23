@@ -21,7 +21,7 @@ export class OrderService {
   private authService = inject(AuthService);
   private cartService = inject(CartService);
 
-  get ordersCollectionRef() {
+  private get ordersCollectionRef() {
     const userPath = this.authService.userDocumentRef?.path;
     if (!userPath) {
       return null;

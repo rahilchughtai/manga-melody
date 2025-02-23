@@ -22,7 +22,7 @@
               Price {{ item.mangaData.price | currency: 'EUR' }}
             </p>
 
-            @if (changable()) {
+            @if (changeable()) {
               <div
                 class="changeQuantity"
                 fxLayout="row wrap"

@@ -13,10 +13,8 @@ import { catchError, map, Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class MangaApiService {
-  http = inject(HttpClient);
-
+  private http = inject(HttpClient);
   private BASE_URL = 'https://api.jikan.moe/v4';
-
   private standardParams: JikanApiRequestParam = {
     type: 'manga',
     sfw: true,

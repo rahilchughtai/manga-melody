@@ -108,7 +108,7 @@ export class AuthService {
     );
   }
 
-  async setUserData(user: User | null) {
+  private async setUserData(user: User | null) {
     if (!user) {
       throw Error('No user Data Error, handling not implemented');
     }
