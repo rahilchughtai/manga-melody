@@ -86,15 +86,17 @@ export class LoginRegisterComponent {
 
   /** Function for registering a new user */
   public async register() {
-    const { email, password, confirmPassword } = this.registerForm.value;
-    if (!email || !password || password !== confirmPassword) {
+    const { email, password, confirmPassword, username } =
+      this.registerForm.value;
+    if (!username || !email || !password || password !== confirmPassword) {
       return this.registerErrorSig.set(
         'Please fill in all fields and ensure passwords match'
       );
     }
     const response = await this.authService.registerWithEmailAndPassword(
       email,
-      password
+      password,
+      username
     );
     if (typeof response !== 'string') {
       this.registerErrorSig.set(response.message);

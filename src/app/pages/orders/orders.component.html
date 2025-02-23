@@ -4,12 +4,16 @@
   <ul>
     @for (order of ordersSig(); track $index) {
       <li class="outer">
+        @if (order.orderId) {
+          <h2>Order ID: {{ order.orderId }}</h2>
+        }
+
         <h2 style="margin-bottom: 10px">
-          Order date: {{ order.orderDate.toDate() | date: 'medium' }}
+          Order Date: {{ order.orderDate.toDate() | date: 'medium' }}
         </h2>
-        <p class="indeted">
+        <h2 class="indeted">
           Total Amount: {{ order.totalAmount | currency: 'EUR' }}
-        </p>
+        </h2>
 
         <p class="bold">Shipped to:</p>
         <p class="indented">
@@ -22,7 +26,6 @@
         <p class="bold">Shipping includes:</p>
         <app-cart-list [cartItems]="order.orderItems" [changable]="false" />
       </li>
-      
     }
   </ul>
 </div>
