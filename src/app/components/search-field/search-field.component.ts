@@ -57,6 +57,9 @@ export class SearchFieldComponent {
     this.mangaSearchForm.patchValue({ sortBy: newSortMethod });
   }
 
+  /**
+   * Observable that emits the current value of the manga search form with a debounce for changes in the search term.
+   */
   public debouncedSearch = this.mangaSearchForm.valueChanges.pipe(
     startWith(this.mangaSearchForm.value),
     pairwise(),

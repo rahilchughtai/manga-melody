@@ -13,7 +13,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-list',
@@ -35,8 +34,6 @@ export class CartListComponent {
   private cartService = inject(CartService);
   public changable = input.required<boolean>();
   public cartItems = input.required<CartItem[]>();
-  private router = inject(Router);
-
   public maxQuantity = MAX_MANGA_ORDER_QUANTITY;
   public mangaQuantityOptions = createArrayFromInteger(this.maxQuantity);
 

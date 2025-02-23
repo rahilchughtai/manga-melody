@@ -5,7 +5,11 @@
     (error)="imageError = true"
     alt="User Photo"
   />
-  <p>Username: {{ userData()?.displayName }}</p>
-  <p>E-Mail: {{ userData()?.email }}</p>
+  @if ( userData()?.displayName) {
+    <p>Username: {{ userData()?.displayName }}</p>
+  }
+  @if ( userData()?.email) {
+    <p>E-Mail: {{ userData()?.email }}</p>
+  }
   <button mat-flat-button (click)="authService.signOut()">Sign Out</button>
 </div>

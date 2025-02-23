@@ -11,8 +11,10 @@ import { Component, inject, Signal } from '@angular/core';
   styleUrl: './favorites.component.scss',
 })
 export class FavoritesComponent {
+  /** Inject the FavoritesService to fetch manga favorites */
   private favoriteService = inject(FavoritesService);
 
+  /** A signal that holds the list of manga favorites */
   public mangaFavoritesSig = this.favoriteService
     .mangaFavorites as unknown as Signal<MangaFavorite[]>;
 }

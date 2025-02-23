@@ -11,5 +11,6 @@ export interface CheckOutData {
 
 export interface MangaOrder extends CheckOutData {
   orderDate: Timestamp;
+  orderId?: string;
   user: MangaUser;
 }

@@ -1,5 +1,6 @@
 import { AuthService } from '../../shared/services';
 import { Component, computed, inject } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
@@ -9,10 +10,19 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './profile.component.scss',
 })
 export class ProfileComponent {
+  /** AuthService to handle user authentication */
   public authService = inject(AuthService);
-  public userData = this.authService.userStateSig;
+
+  /** User data from the AuthService */
+  public userData = toSignal(this.authService.getUserData());
+
+  /** Error flag for image loading */
   public imageError = false;
+
+  /** Fallback image for user profile */
   public fallbackImage = 'assets/user.jpg';
+
+  /** Computed property for the user's profile image URL */
   public imageUIrl = computed(
     () => this.userData()?.photoURL ?? this.fallbackImage
   );
