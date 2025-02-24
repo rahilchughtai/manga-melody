@@ -8,7 +8,7 @@ import {
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
 
-fdescribe('MangaApiService', () => {
+describe('MangaApiService', () => {
   let service: MangaApiService;
   let httpTesting: HttpTestingController;
 

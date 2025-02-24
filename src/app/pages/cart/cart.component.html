@@ -1,7 +1,7 @@
 <div class="cart">
   @if (cartItems()?.length) {
     <app-cart-list
-      [changable]="true"
+      [changeable]="true"
       [cartItems]="cartItems() || []"></app-cart-list>
 
     <hr />

@@ -33,7 +33,12 @@ export class AuthService {
   constructor() {
     effect(() => {
       const user = this.userStateSig();
+      if (localStorage.getItem('user')) {
+        // User is already logged in
+        return;
+      }
       if (user) {
+        // User is freshly logged in
         this.setUserData(user);
         localStorage.setItem('user', JSON.stringify(user));
         this.router.navigate([APP_ROUTES.PROFILE]);

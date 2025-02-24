@@ -1,9 +1,9 @@
 import { CartItem } from '../../models/cart.model';
 import { MAX_MANGA_ORDER_QUANTITY } from '../../utils/manga-utils';
 import { AuthService } from '../auth/auth.service';
+import { FirestoreWrapperService } from '../firestore-wrapper/firestore-wrapper.service';
 import { SnackbarService } from '../snackbar/snackbar.service';
 import { inject, Injectable } from '@angular/core';
-import { updateDoc } from '@angular/fire/firestore';
 import { map, take } from 'rxjs';
 
 @Injectable({
@@ -12,9 +12,10 @@ import { map, take } from 'rxjs';
 export class CartService {
   private authService = inject(AuthService);
   private snackService = inject(SnackbarService);
+  private firestoreWrapper = inject(FirestoreWrapperService);
 
   public getShoppingCart() {
-    return this.authService.getUserData().pipe(map(user => user?.cart ?? []));
+    return this.authService.getUserData().pipe(map(user => user?.cart || []));
   }
 
   private findCartItemIndex(cart: CartItem[], newCartItem: CartItem) {
@@ -45,6 +46,16 @@ export class CartService {
     return this.filterItemFromCart(cart, existingCartIndex);
   }
 
+  /**
+   * Helper function to merge a new cart item with the existing cart.
+   * If the new quantity is less than or equal to 0, the item will be removed from the cart.
+   * If the new quantity exceeds the max manga order quantity, a snackbar will be displayed.
+   * @param cart The existing cart.
+   * @param newCartItem The new cart item to be merged with the existing cart.
+   * @param overrideQuantity If true, the quantity of an existing item will be overridden by the new item's quantity.
+   * Otherwise, the quantity will be added to the existing item's quantity.
+   * @returns The updated cart.
+   * */
   private mergeCart(
     cart: CartItem[],
     newCartItem: CartItem,
@@ -78,6 +89,12 @@ export class CartService {
     );
   }
 
+  /**
+   * Deletes an item from the shopping cart.
+   *
+   * @param cartItem - The item to be deleted from the shopping cart.
+   * @returns An observable that completes when the item has been deleted.
+   */
   public deleteItemFromShoppingCart(cartItem: CartItem) {
     return this.getShoppingCart()
       ?.pipe(take(1))
@@ -87,9 +104,18 @@ export class CartService {
       });
   }
 
+  /**
+   * Updates or inserts a manga item in the shopping cart.
+   *
+   * @param newCartItem - The new cart item to be added or updated.
+   * @param overrideQuantity - If true, the quantity of an existing item will be overridden by the new item's quantity.
+   * Otherwise, the quantity will be added to the existing item's quantity.
+   *
+   * @returns An observable that emits the updated shopping cart.
+   */
   public upsertMangaItemToCart(
     newCartItem: CartItem,
-    overrideQuantity: boolean
+    overrideQuantity = false
   ) {
     return this.getShoppingCart()
       ?.pipe(take(1))
@@ -99,16 +125,35 @@ export class CartService {
       });
   }
 
+  /**
+   * Updates the shopping cart in Firestore.
+   *
+   * @param newCart The new shopping cart to be updated in Firestore.
+   * @returns void
+   */
   private updateShoppingCart(newCart: CartItem[]) {
     const docRef = this.authService.userDocumentRef;
     if (!docRef) {
       return;
     }
-    updateDoc(docRef, { cart: newCart });
+    this.firestoreWrapper.updateDoc(docRef, { cart: newCart });
   }
 
-  public modifyCartItemQuantity(cartItem: CartItem, newQuantity: number) {
-    const newCartItem = { ...cartItem, quantity: newQuantity };
+  /**
+   * Modifies the quantity of a cart item in the shopping cart.
+   * If the new quantity is less than or equal to 0, the item will be removed from the cart.
+   * If the new quantity exceeds the max manga order quantity, a snackbar will be displayed.
+   * @param existingCartItem The existing cart item to be modified.
+   * @param newQuantity The new quantity of the cart item.
+   * @returns void
+   * @see {@link MAX_MANGA_ORDER_QUANTITY}
+   * */
+  public modifyCartItemQuantity(
+    existingCartItem: CartItem,
+    newQuantity: number
+  ) {
+    const newCartItem = { ...existingCartItem, quantity: newQuantity };
+    // The new quantity is already correct and will be used to override the existing quantity.
     return this.upsertMangaItemToCart(newCartItem, true);
   }
 }

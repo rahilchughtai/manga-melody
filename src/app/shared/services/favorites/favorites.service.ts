@@ -1,5 +1,6 @@
 import { MangaFavorite, MangaItem } from '../../models';
 import { AuthService } from '../auth/auth.service';
+import { FirestoreWrapperService } from '../firestore-wrapper/firestore-wrapper.service';
 import {
   computed,
   effect,
@@ -9,12 +10,12 @@ import {
   Signal,
   signal,
 } from '@angular/core';
-import { setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesService {
+  private firestoreWrapper = inject(FirestoreWrapperService);
   private authService = inject(AuthService);
   private isLoggedInSig = this.authService.isLoggedInSig();
   private STORAGE_ID = 'favorites';
@@ -35,7 +36,7 @@ export class FavoritesService {
         if (!userDocumentRef) {
           return;
         }
-        setDoc(
+        this.firestoreWrapper.setDoc(
           userDocumentRef,
           { favorites: this.mangaFavorites() },
           { merge: true }
