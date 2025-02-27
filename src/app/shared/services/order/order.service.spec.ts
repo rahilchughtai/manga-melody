@@ -23,6 +23,7 @@ describe('OrderService', () => {
     firestoreWrapperFixture = new FirestoreWrapperServiceFixture();
     authServiceFixture = new AuthServiceFixture();
     authServiceFixture.userDocumentRef = { path: '' };
+    authServiceFixture.userDataSnapshot = { name: 'user' };
 
     TestBed.configureTestingModule({
       providers: [
@@ -42,7 +43,10 @@ describe('OrderService', () => {
   });
 
   it('should return null if the user is not logged in', () => {
+    authServiceFixture.userDataSnapshot = null;
+    authServiceFixture.userDocumentRef = null;
     expect(service.makeOrder(mockCheckoutData)).toBeNull();
+    expect(firestoreWrapperFixture.addDoc).not.toHaveBeenCalled();
   });
 
   it('should make an order when the user is logged in and clear the cart', () => {
