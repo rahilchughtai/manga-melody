@@ -1,6 +1,6 @@
 import { CartListComponent } from '../../components/cart-list/cart-list.component';
 import { NextTabButtonComponent } from '../../components/payment/next-tab-button/next-tab-button.component';
-import { CartItem, CheckOutData } from '../../shared/models';
+import { CheckOutData, CheckoutNavigationState } from '../../shared/models';
 import { OrderService } from '../../shared/services';
 import { SnackbarService } from '../../shared/services';
 import { APP_ROUTES } from '../../shared/utils/app-routes';
@@ -20,10 +20,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { Router } from '@angular/router';
 import { ValidatorService } from 'angular-iban';
-
-interface CheckoutNavigationState {
-  cartItems: CartItem[];
-}
 
 @Component({
   selector: 'app-checkout',

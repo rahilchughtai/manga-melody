@@ -1,32 +1,26 @@
 import { CheckOutData, MangaOrder } from '../../models';
 import { AuthService } from '../auth/auth.service';
 import { CartService } from '../cart/cart.service';
+import { FirestoreWrapperService } from '../firestore-wrapper/firestore-wrapper.service';
 import { inject, Injectable } from '@angular/core';
 import { query } from '@angular/fire/firestore';
-import {
-  addDoc,
-  collection,
-  collectionData,
-  Firestore,
-  orderBy,
-  Timestamp,
-} from '@angular/fire/firestore';
+import { orderBy, Timestamp } from '@angular/fire/firestore';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private firestore = inject(Firestore);
+  private firestoreWrapper = inject(FirestoreWrapperService);
   private authService = inject(AuthService);
   private cartService = inject(CartService);
 
-  get ordersCollectionRef() {
+  private get ordersCollectionRef() {
     const userPath = this.authService.userDocumentRef?.path;
     if (!userPath) {
       return null;
     }
-    return collection(this.firestore, userPath, 'orders');
+    return this.firestoreWrapper.collection(userPath, 'orders');
   }
 
   public makeOrder(checkoutData: CheckOutData) {
@@ -44,7 +38,7 @@ export class OrderService {
       user,
     };
     this.cartService.clearCart();
-    return addDoc(this.ordersCollectionRef, orderData);
+    return this.firestoreWrapper.addDoc(this.ordersCollectionRef, orderData);
   }
 
   public getUserOrders() {
@@ -52,7 +46,7 @@ export class OrderService {
       return of(undefined);
     }
 
-    return collectionData(
+    return this.firestoreWrapper.collectionData(
       query(this.ordersCollectionRef, orderBy('orderDate', 'desc')),
       { idField: 'orderId' }
     ) as Observable<MangaOrder[] | undefined>;

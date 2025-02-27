@@ -12,7 +12,7 @@ type SnackbarStyle =
 export class SnackbarService {
   private snackbar = inject(MatSnackBar);
 
-  openSnackBar(
+  public openSnackBar(
     message: string,
     styleClass: SnackbarStyle = 'snackbar-success',
     action = 'Okay',

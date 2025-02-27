@@ -12,6 +12,7 @@ describe('MangaListComponent', () => {
 
     fixture = TestBed.createComponent(MangaListComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('mangaList', []);
     fixture.detectChanges();
   });
 

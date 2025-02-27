@@ -8,3 +8,7 @@ export interface CartItem extends CartFormInformation {
   mangaData: MinimalMangaItemData;
   subtotal: number;
 }
+
+export interface CheckoutNavigationState {
+  cartItems: CartItem[];
+}
