@@ -6,7 +6,7 @@
 
     <hr />
     <div style="text-align: center" class="checkout">
-      <p>Total: Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
+      <p>Total Amount {{ cartTotalAmount() | currency: 'EUR' }}</p>
     </div>
 
     <button (click)="navigateToCheckout()" color="primary" mat-flat-button>
