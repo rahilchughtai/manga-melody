@@ -6,7 +6,6 @@ import { SnackbarService } from '../../shared/services';
 import {
   createArrayFromInteger,
   MAX_MANGA_ORDER_QUANTITY,
-  minifyMangaData,
 } from '../../shared/utils/manga-utils';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
@@ -98,7 +97,7 @@ export class MangaDetailsComponent {
     volume ??= 1;
     this.cartService.upsertMangaItemToCart(
       {
-        mangaData: minifyMangaData(this.navState.mangaData),
+        mangaData: this.navState.mangaData,
         quantity,
         volume,
         subtotal: price * quantity,

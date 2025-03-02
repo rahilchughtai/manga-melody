@@ -1,4 +1,4 @@
-import { MangaFavorite, MangaItem } from '../../models';
+import { MangaItem } from '../../models';
 import { AuthService } from '../auth/auth.service';
 import { FirestoreWrapperService } from '../firestore-wrapper/firestore-wrapper.service';
 import {
@@ -45,42 +45,25 @@ export class FavoritesService {
     });
   }
 
-  private getInitialStorageFavorites(): MangaFavorite[] {
+  private getInitialStorageFavorites(): MangaItem[] {
     const favorites = localStorage.getItem(this.STORAGE_ID);
     return favorites !== null ? JSON.parse(favorites) : [];
   }
 
   public addMangaFavorite(mangaItem: MangaItem) {
-    const {
-      mal_id,
-      title,
-      title_english,
-      title_japanese,
-      published,
-      images,
-      price,
-    } = mangaItem;
+    const { mal_id } = mangaItem;
     if (this.sigMangaFavoriteIds().has(mal_id)) {
       return;
     }
 
-    const mangaFavorite: MangaFavorite = {
-      price,
-      mal_id,
-      title,
-      title_english,
-      title_japanese,
-      published,
-      images,
-    };
-    this.sigMangaFavorites.set([...this.mangaFavorites(), mangaFavorite]);
+    this.sigMangaFavorites.set([...this.mangaFavorites(), mangaItem]);
   }
 
   public isFavorite(mangaItem: MangaItem): Signal<boolean> {
     return computed(() => this.sigMangaFavoriteIds().has(mangaItem.mal_id));
   }
 
-  public removeMangaFromFavorites(mangaItem: MangaFavorite) {
+  public removeMangaFromFavorites(mangaItem: MangaItem) {
     this.sigMangaFavorites.set(
       this.mangaFavorites().filter(({ mal_id }) => mal_id !== mangaItem.mal_id)
     );

@@ -45,17 +45,14 @@ export interface JikanResourceRelation {
   entry: JikanResource[];
 }
 
-export interface MangaFavorite {
+export interface MangaItem {
   mal_id: number;
   title: string;
   title_english: string;
   title_japanese: string;
-  published: Published;
   volumes?: number;
   images: ImageType;
   price: number;
-}
-export interface MangaItem extends MangaFavorite {
   url?: string;
   synopsis?: string;
   type?: string;
@@ -69,18 +66,6 @@ export interface MangaItem extends MangaFavorite {
   favorites?: number;
   genres?: GenreItem[];
 }
-
-export type MinimalMangaItemData = Pick<
-  MangaItem,
-  | 'mal_id'
-  | 'title'
-  | 'title_english'
-  | 'title_japanese'
-  | 'published'
-  | 'volumes'
-  | 'images'
-  | 'price'
->;
 
 export interface Published {
   from: Date;

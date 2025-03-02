@@ -1,25 +1,4 @@
-import { CartItem, MangaItem, MinimalMangaItemData } from '../models';
-
-export function minifyMangaData(manga: MangaItem): MinimalMangaItemData {
-  const {
-    images,
-    mal_id,
-    published,
-    title,
-    title_english,
-    title_japanese,
-    price,
-  } = manga;
-  return {
-    images,
-    mal_id,
-    published,
-    title,
-    title_english,
-    title_japanese,
-    price,
-  };
-}
+import { CartItem, MangaItem } from '../models';
 
 export const createArrayFromInteger = (length: number): number[] =>
   [...Array(length).keys()].map(i => i + 1);

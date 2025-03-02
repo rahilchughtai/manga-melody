@@ -1,5 +1,5 @@
 import { MangaListComponent } from '../../components/manga-list/manga-list.component';
-import { MangaFavorite } from '../../shared/models';
+import { MangaItem } from '../../shared/models';
 import { FavoritesService } from '../../shared/services';
 import { CommonModule } from '@angular/common';
 import { Component, inject, Signal } from '@angular/core';
@@ -16,5 +16,5 @@ export class FavoritesComponent {
 
   /** A signal that holds the list of manga favorites */
   public mangaFavoritesSig = this.favoriteService
-    .mangaFavorites as unknown as Signal<MangaFavorite[]>;
+    .mangaFavorites as unknown as Signal<MangaItem[]>;
 }
