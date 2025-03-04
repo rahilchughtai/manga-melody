@@ -45,8 +45,6 @@ Test-Account Daten:
 Nach dem Login stehen dem Nutzer sämtliche Features von MangaMelody zur Verfügung. Die Homepage dient hierbei hauptsächlich dazu, den Nutzer zu begrüßen, und diesen zur Nutzung der Seite einzuladen.
 Auf der Such-Seite stehen dem Nutzer mehr Funktionen zur Verfügung.
 
-![Suchfunktion in Aktion.](./images/screenshots/search.png)
-
 Die Suche erlaubt folgende Filtermöglichkeiten:
 
 - Titel: Filtern nach Titel des Manga
@@ -67,8 +65,6 @@ Auf dieser kann der Nutzer sich mehr Infos zum Manga anschauen und diesen auch i
 Hierbei muss immer der jeweilige Manga Band (Volume) und die Anzahl (maximal 50) angegeben werden.
 
 Sobald der Warenkorb gefüllt ist, kann der Nutzer auf die Warenkorb-Seite navigieren, die Artikel überprüfen und anschließend zum Checkout.
-
-![Warenkorb-Seite. Von hier aus kann zum Checkout navigiert werden.](./images/screenshots/cart.png)
 
 Der Checkout-Prozess besteht aus drei Schritten. 
 
